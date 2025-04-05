@@ -1,181 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>MBTI 가이드</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      background-color: #f8f8f8;
+    }
 
-<style>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-  }
-  th {
-    background-color: #000;
-    color: white;
-    font-size: 24px;
-    padding: 15px 0;
-  }
-  td {
-    width: 25%;
-    position: relative;
-    padding: 0;
-  }
-  .mbti-img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .mbti-label {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 5px 0;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  .mbti-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-  }
-</style>
+    .title-bar {
+      background-color: #cbb7f0; /* 파스텔톤 배경 */
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-<table border="1">
-  <tr>
-    <th colspan="4">MBTI 가이드</th>
-  </tr>
-  <tr>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLSPsG%2FbtsNbiLRdEv%2F2lr2b0Q9YFF9KOmWTXTOGk%2Fimg.jpg" alt="ISTJ">
-          <div class="mbti-label">ISTJ</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FlZiXy%2FbtsNbp46xZC%2FOLKgDkrmg9GLRmQxULCPe1%2Fimg.jpg" alt="ISFJ">
-          <div class="mbti-label">ISFJ</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FtYrAz%2FbtsNaKIPwSb%2F64xd8c49QnrBH0fGoZt571%2Fimg.jpg" alt="INFJ">
-          <div class="mbti-label">INFJ</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbjdTRh%2FbtsM9Y9bLEv%2Fic6COyXf6ZAu15jsKHfcak%2Fimg.jpg" alt="INTJ">
-          <div class="mbti-label">INTJ</div>
-        </div>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbhK6Cd%2FbtsNa9Pa2Ff%2FlZTf9DZAFVcseTJm3JiHCk%2Fimg.jpg" alt="ISTP">
-          <div class="mbti-label">ISTP</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbAx02K%2FbtsNbepctPY%2FdICndKHIk3lidI8vgOrCa0%2Fimg.jpg" alt="ISFP">
-          <div class="mbti-label">ISFP</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbeEYZ4%2FbtsM9W4Glok%2FS6lk4bjhNWf6m4cuQm8AOK%2Fimg.jpg" alt="INFP">
-          <div class="mbti-label">INFP</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcvNxjR%2FbtsM97ESMmZ%2FBLJr4Qn5Bz870ptYQdBzhK%2Fimg.jpg" alt="INTP">
-          <div class="mbti-label">INTP</div>
-        </div>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcnJz8p%2FbtsM92cGPOx%2Fqu92uC9bIugDoLXSRFLjhk%2Fimg.jpg" alt="ESTP">
-          <div class="mbti-label">ESTP</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLbcEB%2FbtsM9vxUxvk%2FNQ9EE1U8UDoZiiUPlLQTu1%2Fimg.jpg" alt="ESFP">
-          <div class="mbti-label">ESFP</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbaXpWx%2FbtsM9JkbMa6%2FxnAiTmy1bxN5AKi5XVre5k%2Fimg.jpg" alt="ENFP">
-          <div class="mbti-label">ENFP</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FnkdKd%2FbtsM9VxULG8%2F6spG50tKMPXfznTcZjzLWk%2Fimg.jpg" alt="ENTP">
-          <div class="mbti-label">ENTP</div>
-        </div>
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F6Ja1D%2FbtsNaFHLtNu%2FkbVOiRMj9gXs1cOLMz5SmK%2Fimg.jpg" alt="ESTJ">
-          <div class="mbti-label">ESTJ</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fwef9E%2FbtsM9YOVvTs%2FP94fFoFLsxuoKlLD9Kkk61%2Fimg.jpg" alt="ESFJ">
-          <div class="mbti-label">ESFJ</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fq2BEB%2FbtsNaHFp5Jv%2FvlBY2jR7crUkLXKYSZmhd0%2Fimg.jpg" alt="ENFJ">
-          <div class="mbti-label">ENFJ</div>
-        </div>
-      </a>
-    </td>
-    <td>
-      <a href="#">
-        <div class="mbti-wrapper">
-          <img class="mbti-img" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbSsAU3%2FbtsM9KQX2sn%2FPLqx9L7kAqW8l6LqsF5TC1%2Fimg.jpg" alt="ENTJ">
-          <div class="mbti-label">ENTJ</div>
-        </div>
-      </a>
-    </td>
-  </tr>
-</table>
+    .toggle-btn {
+      background-color: white;
+      border: none;
+      color: #6c4ba4;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    td {
+      width: 25%;
+      position: relative;
+      padding: 0;
+    }
+
+    .mbti-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .mbti-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .mbti-label {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 25%; /* 이미지의 25% 높이 */
+      background-color: rgba(0, 0, 0, 0.8); /* 투명도 80% */
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <script>
+    function toggleTable() {
+      const table = document.getElementById('mbti-table');
+      table.style.display = (table.style.display === 'none') ? 'table' : 'none';
+    }
+  </script>
+</head>
+<body>
+
+  <div class="title-bar">
+    <span>MBTI 가이드</span>
+    <button class="toggle-btn" onclick="toggleTable()">접기 / 펴기</button>
+  </div>
+
+  <table id="mbti-table" border="1">
+    <tr>
+      <td>
+        <a href="#">
+          <div class="mbti-wrapper">
+            <img class="mbti-img" src="이미지링크" alt="ISTJ">
+            <div class="mbti-label">ISTJ</div>
+          </div>
+        </a>
+      </td>
+      <td>
+        <a href="#">
+          <div class="mbti-wrapper">
+            <img class="mbti-img" src="이미지링크" alt="ISFJ">
+            <div class="mbti-label">ISFJ</div>
+          </div>
+        </a>
+      </td>
+      <td>
+        <a href="#">
+          <div class="mbti-wrapper">
+            <img class="mbti-img" src="이미지링크" alt="INFJ">
+            <div class="mbti-label">INFJ</div>
+          </div>
+        </a>
+      </td>
+      <td>
+        <a href="#">
+          <div class="mbti-wrapper">
+            <img class="mbti-img" src="이미지링크" alt="INTJ">
+            <div class="mbti-label">INTJ</div>
+          </div>
+        </a>
+      </td>
+    </tr>
+    <!-- 아래 행도 동일하게 반복해서 추가하세요 -->
+  </table>
+
+</body>
+</html>
