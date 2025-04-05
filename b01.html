@@ -1,0 +1,190 @@
+다음은 티스토리에서 사용할 수 있는 HTML 표 서식입니다. 이미지와 함께 각 MBTI 유형을 클릭할 수 있도록 링크가 설정되어 있으며, 사용자는 각 이미지에 대한 링크와 설명을 직접 수정하시면 됩니다. 표는 요청하신 대로 **5행 x 5열**이며, 두 번째 행부터 네 번째 행까지는 이미지와 텍스트가 있는 구조입니다.
+
+```html
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  th {
+    background-color: #000;
+    color: white;
+    font-size: 24px;
+    padding: 15px 0;
+  }
+  td {
+    width: 25%;
+    position: relative;
+    padding: 0;
+  }
+  .mbti-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .mbti-label {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 5px 0;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .mbti-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+</style>
+
+<table border="1">
+  <tr>
+    <th colspan="4">MBTI 가이드</th>
+  </tr>
+  <tr>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ISTJ">
+          <div class="mbti-label">ISTJ</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ISFJ">
+          <div class="mbti-label">ISFJ</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="INFJ">
+          <div class="mbti-label">INFJ</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="INTJ">
+          <div class="mbti-label">INTJ</div>
+        </div>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ISTP">
+          <div class="mbti-label">ISTP</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ISFP">
+          <div class="mbti-label">ISFP</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="INFP">
+          <div class="mbti-label">INFP</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="INTP">
+          <div class="mbti-label">INTP</div>
+        </div>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ESTP">
+          <div class="mbti-label">ESTP</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ESFP">
+          <div class="mbti-label">ESFP</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ENFP">
+          <div class="mbti-label">ENFP</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ENTP">
+          <div class="mbti-label">ENTP</div>
+        </div>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ESTJ">
+          <div class="mbti-label">ESTJ</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ESFJ">
+          <div class="mbti-label">ESFJ</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ENFJ">
+          <div class="mbti-label">ENFJ</div>
+        </div>
+      </a>
+    </td>
+    <td>
+      <a href="#">
+        <div class="mbti-wrapper">
+          <img class="mbti-img" src="이미지링크" alt="ENTJ">
+          <div class="mbti-label">ENTJ</div>
+        </div>
+      </a>
+    </td>
+  </tr>
+</table>
+```
+
+### 사용 방법
+- `"이미지링크"` 부분에 각 MBTI 유형에 맞는 이미지 주소를 입력하시면 됩니다.
+- `<a href="#">` 내부의 `#` 대신 각 MBTI별 링크 주소를 넣으시면 클릭 시 해당 페이지로 이동됩니다.
+
+필요하시면 제가 깃허브 이미지 링크를 넣은 버전도 도와드릴 수 있습니다. 이미지 URL만 주시면 바로 적용해드릴게요.
