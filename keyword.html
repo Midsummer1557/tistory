@@ -170,11 +170,6 @@
       font-size: 16px;
       font-weight: 500;
     }
-
-    .favorite-tab {
-      text-align: center;
-      margin: 40px 0;
-    }
   </style>
 </head>
 <body>
@@ -186,11 +181,10 @@
     <button onclick="showTab('전기')">💡 전기설비</button>
     <button onclick="showTab('소방')">🔥 소방기술</button>
     <button onclick="showTab('정보')">📊 정보관리</button>
-    <button onclick="showFavorites()">⭐ 즐겨찾기</button>
   </div>
 
   <div class="search-container">
-    <input type="text" id="searchInput" onkeyup="filterKeywords()" placeholder="키워드 또는 회차 검색...">
+    <input type="text" id="searchInput" onkeyup="filterKeywords()" placeholder="키워드 검색...">
   </div>
 
   <div id="content"></div>
@@ -198,23 +192,23 @@
   <button class="dark-toggle" onclick="toggleTheme()">🌙 다크모드</button>
 
   <script>
-    let data = {};
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
+    const data = {
+      시공: {
+        "130회": {
+          1: ["가설구조물", "기초공법"],
+          2: ["도장공사", "콘크리트양생"],
+          3: ["철근시공", "슬래브"],
+          4: ["방수공법", "적산기법"]
+        }
+      }
+    };
 
-    function loadData() {
-      fetch('data.json')
-        .then(res => res.json())
-        .then(json => {
-          data = json;
-          renderContent('시공');
-        });
-    }
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
 
     function renderContent(category) {
       const container = document.getElementById("content");
       container.innerHTML = "";
       const sets = data[category];
-      if (!sets) return;
       for (const session in sets) {
         const accordion = document.createElement("div");
         accordion.className = "accordion";
@@ -246,29 +240,6 @@
         `;
         container.appendChild(accordion);
       }
-    }
-
-    function showFavorites() {
-      const container = document.getElementById("content");
-      container.innerHTML = '<div class="favorite-tab"><h2>⭐ 즐겨찾기 키워드</h2></div>';
-      const keywords = Object.keys(favorites).filter(k => favorites[k]);
-      if (keywords.length === 0) {
-        container.innerHTML += '<p style="text-align:center">즐겨찾기한 키워드가 없습니다.</p>';
-        return;
-      }
-      const grid = document.createElement("div");
-      grid.className = "index-grid";
-      keywords.forEach(k => {
-        const card = document.createElement("div");
-        card.className = "index-card session-1";
-        card.innerHTML = `<div class="index-links">
-          <a href="#" class="favorited" onclick="toggleFavorite(event, '${k}')">
-            <span>${k}</span><span class="star">★</span>
-          </a>
-        </div>`;
-        grid.appendChild(card);
-      });
-      container.appendChild(grid);
     }
 
     function toggleAccordion(el) {
@@ -312,12 +283,12 @@
       e.preventDefault();
       favorites[keyword] = !favorites[keyword];
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      const current = document.querySelector('.tabs button.active')?.textContent?.replace(/[^가-힣]/g, '') || '';
-      if (current) renderContent(current);
-      else showFavorites();
+      renderContent(document.querySelector('.tabs button.active').textContent.replace(/[^가-힣]/g, ''));
     }
 
-    document.addEventListener('DOMContentLoaded', loadData);
+    document.addEventListener('DOMContentLoaded', () => {
+      renderContent('시공');
+    });
   </script>
 </body>
 </html>
