@@ -45,16 +45,16 @@
     }
 
     .tabs button {
-      width: 100%;
-      background: var(--accent-bg);
-      border: none;
-      color: var(--text-color);
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      box-sizing: border-box;
-    }
+  background: var(--accent-bg);
+  border: none;
+  color: var(--text-color);
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  box-sizing: border-box;
+  width: auto;
+}
 
     .tabs button.active {
       background-color: var(--highlight);
@@ -97,10 +97,16 @@
       gap: 30px;
     }
 
-    @media (min-width: 1024px) {
-      .index-container {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    @media (max-width: 768px) {
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tabs button {
+    width: 85%;
+  }
+}
     }
 
     .index-card {
@@ -165,4 +171,189 @@
   </style>
 </head>
 <body>
-<!-- 이하 생략 -->
+  <h1>📚 기술사 키워드 인덱스</h1>
+  <div class="subtitle">한번에 합격하는 기술사 키워드 총정리</div>
+
+  <div class="tabs">
+    <button class="active" onclick="showTab('시공')">🏗️ 건축시공기술사</button>
+    <button onclick="showTab('전기')">⚡ 건축전기설비기술사</button>
+    <button onclick="showTab('기계')">⚙️ 건축기계설비기술사</button>
+    <button onclick="showTab('소방')">🔥 소방기술사</button>
+    <button onclick="showTab('정보')">🖥️ 정보관리기술사</button>
+    <button onclick="showFavorites()">⭐ 즐겨찾기</button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="키워드 검색..." onkeyup="filterKeywords()" />
+  </div>
+  <div id="searchHistory" class="search-history"></div>
+
+  <div id="content" class="index-container"></div>
+
+  <script>
+    const data = {
+  시공: {
+    '130회': {
+      1: ['가설구조물', '기초공법'],
+      2: ['도장공사', '콘크리트양생'],
+      3: ['철근시공', '슬래브'],
+      4: ['방수공법', '적산기법']
+    }
+  },
+  전기: {
+    '130회': {
+      1: ['전선관공사', '배선기구설치'],
+      2: ['조명설비', '동력제어반'],
+      3: ['피뢰시스템', '접지공사'],
+      4: ['전기설비도면해석', '전력계통설계']
+    }
+  },
+  기계: {
+    '130회': {
+      1: ['냉난방기기', '공조시스템'],
+      2: ['배관설비', '펌프설치'],
+      3: ['보일러설계', '급배수설비'],
+      4: ['기계실배치', '에너지효율분석']
+    }
+  },
+  소방: {
+    '130회': {
+      1: ['소화기구', '스프링클러'],
+      2: ['화재감지기', '경보설비'],
+      3: ['방화셔터', '피난설비'],
+      4: ['소방배관도', '소방전기']
+    }
+  },
+  정보: {
+    '130회': {
+      1: ['자료구조', '알고리즘'],
+      2: ['데이터베이스', 'SQL'],
+      3: ['네트워크기초', 'IP주소설정'],
+      4: ['정보보안', '암호화기법']
+    }
+  }
+};
+
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
+    let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+
+    function showTab(category) {
+      const scrollY = window.scrollY;
+      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      const observer = new MutationObserver(() => {
+        window.scrollTo({ top: scrollY });
+        observer.disconnect();
+      });
+      observer.observe(document.getElementById('content'), { childList: true, subtree: true });
+      renderCategory(category);
+    }
+
+    function showFavorites() {
+      const container = document.getElementById('content');
+      container.innerHTML = '';
+      const keywords = Object.keys(favorites).filter(k => favorites[k]);
+      if (keywords.length === 0) {
+        container.innerHTML = '<p style="text-align:center">즐겨찾기한 키워드가 없습니다.</p>';
+        return;
+      }
+      const card = document.createElement('div');
+      card.className = 'index-card';
+      card.innerHTML = <div class="index-title">⭐ 즐겨찾기</div>;
+      const list = document.createElement('div');
+      list.className = 'keyword-list';
+      keywords.forEach(k => {
+        const item = document.createElement('div');
+        item.className = 'keyword favorited';
+        item.innerHTML = <span>${k}</span><span class="star" onclick="toggleFavorite(event, '${k}')">★</span>;
+        list.appendChild(item);
+      });
+      card.appendChild(list);
+      container.appendChild(card);
+    }
+
+    function renderCategory(category) {
+      const container = document.getElementById('content');
+      container.innerHTML = '';
+      const items = data[category];
+      for (const session in items) {
+        const card = document.createElement('div');
+        card.className = 'index-card';
+
+        const title = document.createElement('div');
+        title.className = 'index-title';
+        title.textContent = ${session};
+        card.appendChild(title);
+
+        const tab = document.createElement('div');
+        tab.className = 'session-tabs';
+        for (let i = 1; i <= 4; i++) {
+          const btn = document.createElement('button');
+          btn.textContent = ${i}교시;
+          btn.dataset.session = i;
+          btn.onclick = () => showSession(card, i);
+          if (i === 1) btn.classList.add('active');
+          tab.appendChild(btn);
+        }
+        card.appendChild(tab);
+
+        for (let i = 1; i <= 4; i++) {
+          const list = document.createElement('div');
+          list.className = 'keyword-list';
+          list.dataset.session = i;
+          if (i !== 1) list.style.display = 'none';
+
+          items[session][i]?.forEach(keyword => {
+            const item = document.createElement('div');
+            item.className = 'keyword';
+            if (favorites[keyword]) item.classList.add('favorited');
+            item.innerHTML = <span>${keyword}</span><span class="star" onclick="toggleFavorite(event, '${keyword}')">★</span>;
+            list.appendChild(item);
+          });
+
+          card.appendChild(list);
+        }
+        container.appendChild(card);
+      }
+    }
+
+    function showSession(card, session) {
+      card.querySelectorAll('.session-tabs button').forEach(b => b.classList.remove('active'));
+      card.querySelectorAll(.session-tabs button[data-session="${session}"]).forEach(b => b.classList.add('active'));
+      card.querySelectorAll('.keyword-list').forEach(k => {
+        k.style.display = k.dataset.session == session ? 'block' : 'none';
+      });
+    }
+
+    function toggleFavorite(e, keyword) {
+      e.preventDefault();
+      favorites[keyword] = !favorites[keyword];
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      renderCategory(document.querySelector('.tabs button.active').textContent.trim());
+    }
+
+    function filterKeywords() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      if (input.length > 1 && !searchHistory.includes(input)) {
+        searchHistory.unshift(input);
+        if (searchHistory.length > 10) searchHistory.pop();
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        renderSearchHistory();
+      }
+      document.querySelectorAll('.keyword').forEach(el => {
+        const text = el.textContent.toLowerCase();
+        el.style.display = text.includes(input) ? 'flex' : 'none';
+      });
+    }
+
+    function renderSearchHistory() {
+      const container = document.getElementById('searchHistory');
+      container.innerHTML = searchHistory.map(q => <span>${q}</span>).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCategory('시공');
+      renderSearchHistory();
+    });
+  </script>
+</body>
