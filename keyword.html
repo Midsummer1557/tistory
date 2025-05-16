@@ -41,8 +41,15 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       font-size: 32px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 30px;
     }
 
     .tabs, .session-tabs {
@@ -62,6 +69,15 @@
       cursor: pointer;
       font-weight: 500;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      flex: 1 1 45%;
+      max-width: 45%;
+    }
+
+    @media (max-width: 600px) {
+      .tabs button, .session-tabs button {
+        flex: 1 1 80%;
+        max-width: 80%;
+      }
     }
 
     .tabs button.active, .session-tabs button.active {
@@ -98,6 +114,13 @@
       cursor: pointer;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    .accordion-desc {
+      font-size: 14px;
+      margin: 5px 0 15px 0;
+      color: #888;
+      text-align: center;
     }
 
     .index-container {
@@ -142,6 +165,10 @@
       padding: 5px 0;
     }
 
+    .index-links a:hover span:first-child {
+      text-decoration: underline;
+    }
+
     .index-links a.highlight {
       font-weight: bold;
       color: var(--highlight);
@@ -155,6 +182,32 @@
 
     .index-links a.favorited .star {
       color: gold;
+    }
+
+    .index-links a span:first-child {
+      position: relative;
+    }
+
+    .index-links a span:first-child::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 120%;
+      left: 0;
+      background-color: #333;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(5px);
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .index-links a span:first-child:hover::after {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .dark-toggle {
@@ -179,6 +232,7 @@
 </head>
 <body>
   <h1>📚 기술사 키워드 인덱스</h1>
+  <div class="subtitle">기술사 시험에 자주 출제되는 키워드를 회차 및 교시별로 정리했습니다.</div>
 
   <div class="tabs">
     <button class="active" onclick="showTab('시공')">🏗️ 건축시공</button>
@@ -222,6 +276,7 @@
 
         accordion.innerHTML = `
           <div class="accordion-title" onclick="toggleAccordion(this)">${session} ${category} 기술사</div>
+          <div class="accordion-desc">${category} ${session} 출제 경향 분석 요약 문장.</div>
           <div class="index-container">
             <div class="session-tabs">
               <button onclick="showSession(this, 1)">1교시</button>
@@ -229,14 +284,15 @@
               <button onclick="showSession(this, 3)">3교시</button>
               <button onclick="showSession(this, 4)">4교시</button>
             </div>
+            <div class="accordion-desc">각 교시별 핵심 이슈와 기술 트렌드를 분석해 보세요.</div>
             <div class="index-grid">
               ${Object.entries(sets[session]).map(([s, keywords]) => `
                 <div class="index-card session-${s}" data-session="${s}" style="display:${s == 1 ? 'block' : 'none'}">
                   <div class="index-title">${s}교시</div>
                   <div class="index-links">
-                    ${keywords.map(k => `
+                    ${keywords.map(([k, d]) => `
                       <a href="#" class="${favorites[k] ? 'favorited' : ''}" onclick="toggleFavorite(event, '${k}')">
-                        <span>${k}</span>
+                        <span title="${d}">${k}</span>
                         <span class="star">★</span>
                       </a>`).join('')}
                   </div>
@@ -263,7 +319,7 @@
         card.className = "index-card session-1";
         card.innerHTML = `<div class="index-links">
           <a href="#" class="favorited" onclick="toggleFavorite(event, '${k}')">
-            <span>${k}</span><span class="star">★</span>
+            <span title="즐겨찾기된 키워드">${k}</span><span class="star">★</span>
           </a>
         </div>`;
         grid.appendChild(card);
