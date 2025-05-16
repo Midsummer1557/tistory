@@ -60,7 +60,7 @@
       gap: 10px;
     }
 
-    .tabs button {
+    .tabs button, .session-tabs button {
       background: var(--accent-bg);
       border: none;
       color: var(--text-color);
@@ -69,11 +69,14 @@
       cursor: pointer;
       font-weight: 500;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
     }
 
-    .tabs button.active {
+    .tabs button.active, .session-tabs button.active {
       background-color: var(--highlight);
       color: white;
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     .search-container {
@@ -90,6 +93,23 @@
       font-size: 16px;
       background-color: var(--card-bg);
       color: var(--text-color);
+    }
+
+    .search-history {
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    .search-history span {
+      display: inline-block;
+      background: #eee;
+      color: #333;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin: 4px;
+      font-size: 13px;
     }
 
     .accordion {
@@ -122,31 +142,6 @@
       gap: 10px;
       margin-bottom: 20px;
       flex-wrap: wrap;
-    }
-
-    .session-tabs button {
-      background-color: var(--accent-bg);
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 500;
-      color: var(--text-color);
-      transition: background-color 0.3s ease;
-      flex: 1 1 20%;
-      max-width: 200px;
-    }
-
-    .session-tabs button.active {
-      background-color: var(--highlight);
-      color: white;
-    }
-
-    @media (max-width: 600px) {
-      .session-tabs button {
-        flex: 1 1 80%;
-        max-width: 80%;
-      }
     }
 
     .index-grid {
@@ -228,6 +223,7 @@
   <div class="search-container">
     <input type="text" id="searchInput" onkeyup="filterKeywords()" placeholder="키워드 검색...">
   </div>
+  <div id="searchHistory" class="search-history"></div>
 
   <div id="content"></div>
 
@@ -246,6 +242,7 @@
     };
 
     const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
+    let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
 
     function renderContent(category) {
       const container = document.getElementById("content");
@@ -306,6 +303,11 @@
 
     function filterKeywords() {
       const input = document.getElementById('searchInput').value.toLowerCase();
+      if (input.length > 1 && !searchHistory.includes(input)) {
+        searchHistory.unshift(input);
+        if (searchHistory.length > 10) searchHistory.pop();
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+      }
       document.querySelectorAll('.index-links a').forEach(link => {
         const text = link.textContent.toLowerCase();
         if (text.includes(input)) {
@@ -314,6 +316,13 @@
           link.classList.remove('highlight');
         }
       });
+      renderSearchHistory();
+    }
+
+    function renderSearchHistory() {
+      const container = document.getElementById('searchHistory');
+      if (!container) return;
+      container.innerHTML = searchHistory.map(q => `<span>${q}</span>`).join('');
     }
 
     function toggleTheme() {
@@ -353,6 +362,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       renderContent('시공');
+      renderSearchHistory();
     });
   </script>
 </body>
