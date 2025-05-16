@@ -1,4 +1,3 @@
-<!-- 기술사 인덱스 - 전체 샘플 컨텐츠 포함 HTML -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -66,9 +65,12 @@
     .index-links a:hover {
       color: #0077cc;
     }
+
+    /* 클릭 횟수별 색상 */
     .click-1 { color: #1565c0; }
     .click-3 { color: #ff8f00; }
     .click-5 { color: #d32f2f; }
+
     .click-count {
       font-size: 12px;
       background: #eee;
@@ -80,134 +82,136 @@
   </style>
 </head>
 <body>
+
   <h1>📚 기술사 기출 서브노트</h1>
   <div class="subtitle">제가 공부하려고 만든 서브노트입니다.</div>
 
-  <!-- 기술사별 섹션 시작 -->
+  <!-- 🏗️ 건축시공기술사 -->
   <div class="section-title">🏗️ 건축시공기술사</div>
   <div class="index-container">
     <div class="index-card">
       <div class="index-title">필수</div>
       <div class="index-links">
-        <a href="#가설구조물" onclick="trackClick(this)">가설구조물<span class="click-count">0</span></a>
-        <a href="#기초공법" onclick="trackClick(this)">기초공법<span class="click-count">0</span></a>
+        <a href="#가설구조물" data-key="가설구조물" onclick="trackClick(this)">가설구조물<span class="click-count"></span></a>
+        <a href="#기초공법" data-key="기초공법" onclick="trackClick(this)">기초공법<span class="click-count"></span></a>
       </div>
     </div>
     <div class="index-card">
       <div class="index-title">추천</div>
       <div class="index-links">
-        <a href="#도장공사" onclick="trackClick(this)">도장공사<span class="click-count">0</span></a>
-        <a href="#슬래브시공" onclick="trackClick(this)">슬래브시공<span class="click-count">0</span></a>
+        <a href="#도장공사" data-key="도장공사" onclick="trackClick(this)">도장공사<span class="click-count"></span></a>
+        <a href="#슬래브시공" data-key="슬래브시공" onclick="trackClick(this)">슬래브시공<span class="click-count"></span></a>
       </div>
     </div>
   </div>
 
+  <!-- ⚙️ 건축기계설비기술사 -->
   <div class="section-title">⚙️ 건축기계설비기술사</div>
   <div class="index-container">
     <div class="index-card">
       <div class="index-title">필수</div>
       <div class="index-links">
-        <a href="#펌프종류" onclick="trackClick(this)">펌프종류<span class="click-count">0</span></a>
-        <a href="#냉난방시스템" onclick="trackClick(this)">냉난방시스템<span class="click-count">0</span></a>
+        <a href="#펌프종류" data-key="펌프종류" onclick="trackClick(this)">펌프종류<span class="click-count"></span></a>
+        <a href="#냉난방시스템" data-key="냉난방시스템" onclick="trackClick(this)">냉난방시스템<span class="click-count"></span></a>
       </div>
     </div>
     <div class="index-card">
       <div class="index-title">추천</div>
       <div class="index-links">
-        <a href="#배관설계" onclick="trackClick(this)">배관설계<span class="click-count">0</span></a>
-        <a href="#에너지절약기법" onclick="trackClick(this)">에너지절약기법<span class="click-count">0</span></a>
+        <a href="#배관설계" data-key="배관설계" onclick="trackClick(this)">배관설계<span class="click-count"></span></a>
+        <a href="#에너지절약기법" data-key="에너지절약기법" onclick="trackClick(this)">에너지절약기법<span class="click-count"></span></a>
       </div>
     </div>
   </div>
 
+  <!-- 💡 건축전기설비기술사 -->
   <div class="section-title">💡 건축전기설비기술사</div>
   <div class="index-container">
     <div class="index-card">
       <div class="index-title">필수</div>
       <div class="index-links">
-        <a href="#배선설계" onclick="trackClick(this)">배선설계<span class="click-count">0</span></a>
-        <a href="#피뢰시스템" onclick="trackClick(this)">피뢰시스템<span class="click-count">0</span></a>
+        <a href="#배선설계" data-key="배선설계" onclick="trackClick(this)">배선설계<span class="click-count"></span></a>
+        <a href="#피뢰시스템" data-key="피뢰시스템" onclick="trackClick(this)">피뢰시스템<span class="click-count"></span></a>
       </div>
     </div>
     <div class="index-card">
       <div class="index-title">추천</div>
       <div class="index-links">
-        <a href="#조명설비" onclick="trackClick(this)">조명설비<span class="click-count">0</span></a>
-        <a href="#접지시스템" onclick="trackClick(this)">접지시스템<span class="click-count">0</span></a>
+        <a href="#조명설비" data-key="조명설비" onclick="trackClick(this)">조명설비<span class="click-count"></span></a>
+        <a href="#접지시스템" data-key="접지시스템" onclick="trackClick(this)">접지시스템<span class="click-count"></span></a>
       </div>
     </div>
   </div>
 
+  <!-- 🔥 소방기술사 -->
   <div class="section-title">🔥 소방기술사</div>
   <div class="index-container">
     <div class="index-card">
       <div class="index-title">필수</div>
       <div class="index-links">
-        <a href="#스프링클러" onclick="trackClick(this)">스프링클러<span class="click-count">0</span></a>
-        <a href="#소화기구" onclick="trackClick(this)">소화기구<span class="click-count">0</span></a>
+        <a href="#스프링클러" data-key="스프링클러" onclick="trackClick(this)">스프링클러<span class="click-count"></span></a>
+        <a href="#소화기구" data-key="소화기구" onclick="trackClick(this)">소화기구<span class="click-count"></span></a>
       </div>
     </div>
     <div class="index-card">
       <div class="index-title">추천</div>
       <div class="index-links">
-        <a href="#경보설비" onclick="trackClick(this)">경보설비<span class="click-count">0</span></a>
-        <a href="#방화구획" onclick="trackClick(this)">방화구획<span class="click-count">0</span></a>
+        <a href="#경보설비" data-key="경보설비" onclick="trackClick(this)">경보설비<span class="click-count"></span></a>
+        <a href="#방화구획" data-key="방화구획" onclick="trackClick(this)">방화구획<span class="click-count"></span></a>
       </div>
     </div>
   </div>
 
+  <!-- 📊 정보관리기술사 -->
   <div class="section-title">📊 정보관리기술사</div>
   <div class="index-container">
     <div class="index-card">
       <div class="index-title">필수</div>
       <div class="index-links">
-        <a href="#정보보안" onclick="trackClick(this)">정보보안<span class="click-count">0</span></a>
-        <a href="#네트워크계층" onclick="trackClick(this)">네트워크계층<span class="click-count">0</span></a>
+        <a href="#정보보안" data-key="정보보안" onclick="trackClick(this)">정보보안<span class="click-count"></span></a>
+        <a href="#네트워크계층" data-key="네트워크계층" onclick="trackClick(this)">네트워크계층<span class="click-count"></span></a>
       </div>
     </div>
     <div class="index-card">
       <div class="index-title">추천</div>
       <div class="index-links">
-        <a href="#SQL최적화" onclick="trackClick(this)">SQL최적화<span class="click-count">0</span></a>
-        <a href="#시스템아키텍처" onclick="trackClick(this)">시스템아키텍처<span class="click-count">0</span></a>
+        <a href="#SQL최적화" data-key="SQL최적화" onclick="trackClick(this)">SQL최적화<span class="click-count"></span></a>
+        <a href="#시스템아키텍처" data-key="시스템아키텍처" onclick="trackClick(this)">시스템아키텍처<span class="click-count"></span></a>
       </div>
     </div>
   </div>
 
-<script>
-  function trackClick(el) {
-    const keyword = el.textContent.split(' ')[0].trim();
-    let count = parseInt(localStorage.getItem(keyword) || "0");
-    count++;
-    localStorage.setItem(keyword, count);
-    updateVisual(el, count);
-  }
-
-  function updateVisual(el, count) {
-    el.classList.remove("click-1", "click-3", "click-5");
-
-    if (count >= 5) {
-      el.classList.add("click-5");
-    } else if (count >= 3) {
-      el.classList.add("click-3");
-    } else if (count >= 1) {
-      el.classList.add("click-1");
+  <script>
+    function trackClick(el) {
+      const key = el.dataset.key;
+      let count = parseInt(localStorage.getItem(key) || "0");
+      count++;
+      localStorage.setItem(key, count);
+      updateVisual(el, count);
     }
 
-    const span = el.querySelector('.count');
-    if (span) span.textContent = `(${count})`;
-  }
+    function updateVisual(el, count) {
+      el.classList.remove("click-1", "click-3", "click-5");
 
-  window.onload = () => {
-    document.querySelectorAll('.index-links a').forEach(el => {
-      const keyword = el.textContent.split(' ')[0].trim();
-      const count = parseInt(localStorage.getItem(keyword) || "0");
-      if (count > 0) updateVisual(el, count);
-    });
-  };
-</script>
+      if (count >= 5) {
+        el.classList.add("click-5");
+      } else if (count >= 3) {
+        el.classList.add("click-3");
+      } else if (count >= 1) {
+        el.classList.add("click-1");
+      }
 
+      const span = el.querySelector('.click-count');
+      if (span) span.textContent = ` (${count})`;
+    }
 
-  
+    window.onload = () => {
+      document.querySelectorAll('.index-links a').forEach(el => {
+        const key = el.dataset.key;
+        const count = parseInt(localStorage.getItem(key) || "0");
+        if (count > 0) updateVisual(el, count);
+      });
+    };
+  </script>
 </body>
 </html>
