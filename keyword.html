@@ -114,12 +114,12 @@
 
 
   <!-- ⚙️ 건축기계설비기술사 -->
-  <div class="section-title">⚙️ 건축기계설비기술사</div>
+<div class="section-title" data-id="기계설비기술사">⚙️ 건축기계설비기술사</div>
 
 
 
   <!-- ⚙️ 건축기계설비기술사 프로그레스 바 -->
-<div class="progress-wrapper" id="progress-⚙️ 건축기계설비기술사">
+<div class="progress-wrapper" id="progress-기계설비기술사">
   <div class="progress-label">🎯 학습목표 1000회</div>
   <div class="progress-bar">
     <div class="progress-fill"></div>
@@ -170,9 +170,6 @@
 
   <!-- 💡 건축전기설비기술사 제목 -->
   <div class="section-title">💡 건축전기설비기술사</div>
-
-
-
 
 
   <!-- 💡 건축전기설비기술사 내용 -->
@@ -272,7 +269,7 @@
     document.querySelectorAll('.section-title').forEach(titleEl => {
       const field = titleEl.textContent.trim();
       const container = titleEl.nextElementSibling;
-      const progressWrapper = document.getElementById('progress-' + field);
+      const progressWrapper = document.getElementById('progress-' + titleEl.dataset.id);
       if (!progressWrapper || !container) return;
 
       let totalClicks = 0;
