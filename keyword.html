@@ -206,13 +206,20 @@
     const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
 
-    function showTab(category) {
-      const scrollY = window.scrollY;
-      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderCategory(category);
-      setTimeout(() => window.scrollTo({ top: scrollY }), 0);
-    }
+function showTab(category) {
+  const scrollY = window.scrollY;
+  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const observer = new MutationObserver(() => {
+    window.scrollTo({ top: scrollY });
+    observer.disconnect();
+  });
+
+  observer.observe(document.getElementById('content'), { childList: true, subtree: true });
+
+  renderCategory(category);
+}
 
     function showFavorites() {
       const container = document.getElementById('content');
