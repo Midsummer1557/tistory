@@ -1,412 +1,151 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>기술사 브리태니커 인덱스</title>
+  <meta charset="UTF-8">
+  <title>브리태니커 스타일 기술사 인덱스</title>
   <style>
-    :root {
-      --bg-color: #f9fafb;
-      --text-color: #2c3e50;
-      --card-bg: #ffffff;
-      --highlight: #2f80ed;
-      --accent-bg: #ecf3ff;
-      --session-1: #e6f0ff;
-      --session-2: #e8f5e9;
-      --session-3: #fff8e1;
-      --session-4: #fce4ec;
-    }
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: #f4f4f4;
+      padding: 30px;
       margin: 0;
-      padding: 20px;
-      transition: background 0.3s, color 0.3s;
     }
+
     h1 {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 50px;
     }
-    .subtitle {
-      text-align: center;
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 20px;
-    }
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .tabs button {
-      background: var(--accent-bg);
-      border: none;
-      color: var(--text-color);
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
+
+    .section-title {
+      font-size: 24px;
       font-weight: bold;
-      transition: background 0.2s, color 0.2s;
+      color: #222;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      border-left: 6px solid #007acc;
+      padding-left: 12px;
     }
-    .tabs button.active {
-      background-color: var(--highlight);
-      color: white;
-    }
+
     .index-container {
       display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
     }
-    @media (min-width: 1024px) {
-      .index-container {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+
     .index-card {
-      background: var(--card-bg);
+      background-color: white;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      transition: background 0.3s, color 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s;
     }
+
+    .index-card:hover {
+      transform: translateY(-4px);
+    }
+
     .index-title {
       font-weight: bold;
       font-size: 18px;
       margin-bottom: 10px;
-      color: var(--highlight);
+      color: #004c8c;
     }
-    .session-tabs {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-    .session-tabs button {
-      flex: 1 1 20%;
-      border: none;
-      border-radius: 8px;
-      padding: 5px 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .session-tabs button.session-1 { background-color: var(--session-1);}
-    .session-tabs button.session-2 { background-color: var(--session-2);}
-    .session-tabs button.session-3 { background-color: var(--session-3);}
-    .session-tabs button.session-4 { background-color: var(--session-4);}
-    .session-tabs button.active {
-      background-color: var(--highlight) !important;
-      color: white;
-      transform: scale(1.05);
-      border: 2px solid #1d5ecf;
-      box-shadow: 0 2px 6px rgba(47, 128, 237, 0.4);
-    }
-    .session-tabs button:hover {
-      filter: brightness(95%);
-      border: 2px solid #bbb;
-    }
-    .keyword-list {
-      margin-top: 10px;
-    }
-    .keyword {
-      margin: 5px 0;
-      font-size: 16px;
-    }
-    .keyword a {
-      color: var(--highlight);
-      font-weight: bold;
+
+    .index-links a {
+      display: block;
       text-decoration: none;
-      transition: color 0.2s;
-      border-bottom: none;
+      color: #333;
+      padding: 3px 0;
     }
-    .keyword a:hover {
-      color: #144b9c;
-      text-decoration: none;
-      border-bottom: none;
-    }
-    body.dark {
-      --bg-color: #181d27;
-      --text-color: #e4e4ea;
-      --card-bg: #232737;
-      --highlight: #54a0ff;
-      --accent-bg: #263144;
-      --session-1: #24304b;
-      --session-2: #213c32;
-      --session-3: #3c3532;
-      --session-4: #362c35;
-    }
-    body.dark .subtitle { color: #aaa; }
-    .dark-toggle {
-      position: fixed;
-      left: 50%;
-      bottom: 30px;
-      transform: translateX(-50%);
-      z-index: 999;
-      background: var(--highlight);
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      padding: 12px 36px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 2px 10px rgba(44,62,80,0.13);
-      transition: background 0.2s, color 0.2s;
-    }
-    .dark-toggle:hover {
-      background: #222b3a;
-      color: var(--highlight);
-      border: 2px solid var(--highlight);
+
+    .index-links a:hover {
+      color: #0077cc;
     }
   </style>
 </head>
 <body>
-  <h1>📚 기술사 키워드 인덱스</h1>
-  <div class="subtitle">한번에 합격하는 기술사 키워드 총정리</div>
 
-  <div class="tabs">
-    <button class="active" onclick="showTab('시공', event)">건축시공</button>
-    <button onclick="showTab('전기', event)">전기설비</button>
-    <button onclick="showTab('소방', event)">소방기술</button>
-    <button onclick="showTab('기계', event)">기계설비</button>
-    <button onclick="showTab('정보', event)">정보관리</button>
-    <button onclick="showTab('즐겨찾기', event)">⭐ 즐겨찾기</button>
+  <h1>📚 기술사 키워드 인덱스</h1>
+
+  <!-- 건축시공기술사 -->
+  <div class="section-title">🏗️ 건축시공기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">ㄱ</div>
+      <div class="index-links">
+        <a href="#가설구조물">가설구조물</a>
+        <a href="#기초공법">기초공법</a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">ㄷ</div>
+      <div class="index-links">
+        <a href="#도장공사">도장공사</a>
+      </div>
+    </div>
   </div>
 
-  <div id="content" class="index-container"></div>
+  <!-- 건축기계설비기술사 -->
+  <div class="section-title">🛠️ 건축기계설비기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">ㄴ</div>
+      <div class="index-links">
+        <a href="#냉난방시스템">냉난방시스템</a>
+        <a href="#누수진단">누수진단</a>
+      </div>
+    </div>
+  </div>
 
-  <button class="dark-toggle" id="darkToggle">🌙 다크모드</button>
+  <!-- 건축전기설비기술사 -->
+  <div class="section-title">💡 건축전기설비기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">ㄴ</div>
+      <div class="index-links">
+        <a href="#누설전류">누설전류</a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">ㅅ</div>
+      <div class="index-links">
+        <a href="#수배전반">수배전반</a>
+        <a href="#선로보호">선로보호</a>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    // 예시 데이터
-    const data = {
-      시공: {
-        '130회': {
-          1: [
-            { text: '가설구조물', url: 'https://ko.wikipedia.org/wiki/가설구조물' },
-            { text: '기초공법', url: 'https://ko.wikipedia.org/wiki/기초공법' }
-          ],
-          2: [
-            { text: '도장공사', url: 'https://ko.wikipedia.org/wiki/도장공사' },
-            { text: '콘크리트양생', url: 'https://ko.wikipedia.org/wiki/콘크리트' }
-          ],
-          3: [
-            { text: '철근시공', url: 'https://ko.wikipedia.org/wiki/철근콘크리트' },
-            { text: '슬래브', url: 'https://ko.wikipedia.org/wiki/슬래브' }
-          ],
-          4: [
-            { text: '방수공법', url: 'https://ko.wikipedia.org/wiki/방수' },
-            { text: '적산기법', url: 'https://ko.wikipedia.org/wiki/적산' }
-          ]
-        }
-      },
-      전기: {
-        '130회': {
-          1: [
-            { text: '전기이론', url: 'https://ko.wikipedia.org/wiki/전기' },
-            { text: '기초회로', url: 'https://ko.wikipedia.org/wiki/전자_회로' }
-          ],
-          2: [
-            { text: '배선설계', url: 'https://ko.wikipedia.org/wiki/배선' },
-            { text: '전선관공사', url: 'https://ko.wikipedia.org/wiki/전선' }
-          ],
-          3: [
-            { text: '조명설비', url: 'https://ko.wikipedia.org/wiki/조명' },
-            { text: '동력설비', url: 'https://ko.wikipedia.org/wiki/동력' }
-          ],
-          4: [
-            { text: '접지방식', url: 'https://ko.wikipedia.org/wiki/접지' },
-            { text: '피뢰시스템', url: 'https://ko.wikipedia.org/wiki/피뢰침' }
-          ]
-        }
-      },
-      소방: {
-        '130회': {
-          1: [
-            { text: '화재이론', url: 'https://ko.wikipedia.org/wiki/화재' },
-            { text: '연소메커니즘', url: 'https://ko.wikipedia.org/wiki/연소' }
-          ],
-          2: [
-            { text: '스프링클러', url: 'https://ko.wikipedia.org/wiki/스프링클러_설비' },
-            { text: '옥내소화전', url: 'https://ko.wikipedia.org/wiki/소화전' }
-          ],
-          3: [
-            { text: '경보설비', url: 'https://ko.wikipedia.org/wiki/경보' },
-            { text: '비상방송', url: 'https://ko.wikipedia.org/wiki/비상방송' }
-          ],
-          4: [
-            { text: '방염처리', url: 'https://ko.wikipedia.org/wiki/방염' },
-            { text: '내화구조', url: 'https://ko.wikipedia.org/wiki/내화' }
-          ]
-        }
-      },
-      기계: {
-        '130회': {
-          1: [
-            { text: '공기조화', url: 'https://ko.wikipedia.org/wiki/공기조화' },
-            { text: '냉동사이클', url: 'https://ko.wikipedia.org/wiki/냉동' }
-          ],
-          2: [
-            { text: '덕트설계', url: 'https://ko.wikipedia.org/wiki/덕트' },
-            { text: '팬성능', url: 'https://ko.wikipedia.org/wiki/송풍기' }
-          ],
-          3: [
-            { text: '보일러설비', url: 'https://ko.wikipedia.org/wiki/보일러' },
-            { text: '온수공급', url: 'https://ko.wikipedia.org/wiki/온수' }
-          ],
-          4: [
-            { text: '펌프선정', url: 'https://ko.wikipedia.org/wiki/펌프' },
-            { text: '기계실배치', url: 'https://ko.wikipedia.org/wiki/기계실' }
-          ]
-        }
-      },
-      정보: {
-        '130회': {
-          1: [
-            { text: '정보시스템', url: 'https://ko.wikipedia.org/wiki/정보_시스템' },
-            { text: '시스템개발', url: 'https://ko.wikipedia.org/wiki/시스템_개발_생명_주기' }
-          ],
-          2: [
-            { text: '데이터베이스', url: 'https://ko.wikipedia.org/wiki/데이터베이스' },
-            { text: '정규화', url: 'https://ko.wikipedia.org/wiki/정규화' }
-          ],
-          3: [
-            { text: '네트워크', url: 'https://ko.wikipedia.org/wiki/네트워크' },
-            { text: 'OSI 7계층', url: 'https://ko.wikipedia.org/wiki/OSI_모델' }
-          ],
-          4: [
-            { text: 'IT 거버넌스', url: 'https://ko.wikipedia.org/wiki/IT_거버넌스' },
-            { text: '정보화전략', url: 'https://ko.wikipedia.org/wiki/정보화_전략_계획' }
-          ]
-        }
-      }
-    };
+  <!-- 소방기술사 -->
+  <div class="section-title">🔥 소방기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">ㅅ</div>
+      <div class="index-links">
+        <a href="#스프링클러">스프링클러</a>
+        <a href="#소화기구">소화기구</a>
+      </div>
+    </div>
+  </div>
 
-    // 즐겨찾기 관리용
-    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  <!-- 정보관리기술사 -->
+  <div class="section-title">📊 정보관리기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">ㅈ</div>
+      <div class="index-links">
+        <a href="#정보보안">정보보안</a>
+        <a href="#자료구조">자료구조</a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">ㄱ</div>
+      <div class="index-links">
+        <a href="#경영정보시스템">경영정보시스템</a>
+      </div>
+    </div>
+  </div>
 
-    function renderCategory(category) {
-      const container = document.getElementById('content');
-      container.innerHTML = '';
-
-      if (category === '즐겨찾기') {
-        if (favorites.length === 0) {
-          container.innerHTML = `<div class="index-card"><div class="index-title">⭐ 즐겨찾기</div><div>즐겨찾기한 키워드가 없습니다.</div></div>`;
-          return;
-        }
-        const card = document.createElement('div');
-        card.className = 'index-card';
-        card.innerHTML = `<div class="index-title">⭐ 즐겨찾기</div>`;
-        const list = document.createElement('div');
-        list.className = 'keyword-list';
-        favorites.forEach(obj => {
-          const item = document.createElement('div');
-          item.className = 'keyword';
-          item.innerHTML = `<a href="${obj.url}" target="_blank">${obj.text}</a>`;
-          list.appendChild(item);
-        });
-        card.appendChild(list);
-        container.appendChild(card);
-        return;
-      }
-
-      const items = data[category];
-      for (const session in items) {
-        const card = document.createElement('div');
-        card.className = 'index-card';
-
-        const title = document.createElement('div');
-        title.className = 'index-title';
-        title.textContent = `${session}`;
-        card.appendChild(title);
-
-        const tab = document.createElement('div');
-        tab.className = 'session-tabs';
-        for (let i = 1; i <= 4; i++) {
-          const btn = document.createElement('button');
-          btn.textContent = `${i}교시`;
-          btn.classList.add(`session-${i}`);
-          btn.onclick = () => showSession(card, i);
-          if (i === 1) btn.classList.add('active');
-          tab.appendChild(btn);
-        }
-        card.appendChild(tab);
-
-        for (let i = 1; i <= 4; i++) {
-          const list = document.createElement('div');
-          list.className = 'keyword-list';
-          list.dataset.session = i;
-          if (i !== 1) list.style.display = 'none';
-
-          items[session][i]?.forEach(keywordObj => {
-            const item = document.createElement('div');
-            item.className = 'keyword';
-            const isFav = favorites.some(f => f.text === keywordObj.text && f.url === keywordObj.url);
-            item.innerHTML = `
-              <a href="${keywordObj.url}" target="_blank">${keywordObj.text}</a>
-              <span style="cursor:pointer;margin-left:8px;color:${isFav ? 'gold' : '#ccc'};font-size:18px;" title="즐겨찾기" onclick="toggleFavorite(event, '${category}', '${keywordObj.text}', '${keywordObj.url}')">★</span>
-            `;
-            list.appendChild(item);
-          });
-
-          card.appendChild(list);
-        }
-
-        container.appendChild(card);
-      }
-    }
-
-    function showSession(card, session) {
-      card.querySelectorAll('.session-tabs button').forEach(b => b.classList.remove('active'));
-      card.querySelectorAll(`.session-tabs button:nth-child(${session})`).forEach(b => b.classList.add('active'));
-      card.querySelectorAll('.keyword-list').forEach(k => {
-        k.style.display = k.dataset.session == session ? 'block' : 'none';
-      });
-    }
-
-    function showTab(category, event) {
-      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderCategory(category);
-    }
-
-    // 다크모드 기능
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-      // 로컬 저장
-      localStorage.setItem('darkMode', document.body.classList.contains('dark'));
-      document.getElementById('darkToggle').textContent = document.body.classList.contains('dark') ? "☀️ 라이트모드" : "🌙 다크모드";
-    }
-    document.getElementById('darkToggle').onclick = toggleDarkMode;
-
-    // 즐겨찾기 토글
-    window.toggleFavorite = function(e, category, text, url) {
-      e.stopPropagation();
-      const idx = favorites.findIndex(f => f.text === text && f.url === url);
-      if (idx > -1) {
-        favorites.splice(idx, 1);
-      } else {
-        favorites.push({text, url});
-      }
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      // 현재 탭 다시 렌더링
-      renderCategory(document.querySelector('.tabs button.active').textContent.trim());
-    }
-
-    // 자동 다크모드 적용(저장)
-    (function(){
-      if(localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark');
-        document.getElementById('darkToggle').textContent = "☀️ 라이트모드";
-      }
-    })();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      renderCategory('시공');
-    });
-  </script>
 </body>
 </html>
