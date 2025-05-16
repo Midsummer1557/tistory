@@ -6,17 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     :root {
-      --bg-color: #f4f4f4;
-      --text-color: #222;
-      --card-bg: #fff;
-      --highlight: #007acc;
+      --bg-color: #f9fafb;
+      --text-color: #2c3e50;
+      --card-bg: #ffffff;
+      --highlight: #2f80ed;
+      --accent-bg: #ecf3ff;
+      --hover-bg: #dbeaff;
     }
 
     [data-theme="dark"] {
-      --bg-color: #1e1e1e;
-      --text-color: #f0f0f0;
-      --card-bg: #2a2a2a;
-      --highlight: #66ccff;
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --card-bg: #1e1e1e;
+      --highlight: #4dabf7;
+      --accent-bg: #1a2b3c;
+      --hover-bg: #2a3b4c;
     }
 
     body {
@@ -30,6 +34,7 @@
     h1 {
       text-align: center;
       margin-bottom: 30px;
+      font-size: 32px;
     }
 
     .tabs {
@@ -40,13 +45,15 @@
     }
 
     .tabs button {
-      background: none;
-      border: 2px solid var(--highlight);
+      background: var(--accent-bg);
+      border: none;
       color: var(--text-color);
       padding: 10px 20px;
       margin: 5px;
-      border-radius: 5px;
+      border-radius: 30px;
       cursor: pointer;
+      font-weight: 500;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .tabs button.active {
@@ -60,11 +67,14 @@
     }
 
     .search-container input {
-      padding: 10px;
+      padding: 12px;
       width: 90%;
-      max-width: 400px;
-      border-radius: 5px;
+      max-width: 420px;
+      border-radius: 8px;
       border: 1px solid #ccc;
+      font-size: 16px;
+      background-color: var(--card-bg);
+      color: var(--text-color);
     }
 
     .accordion {
@@ -72,13 +82,14 @@
     }
 
     .accordion-title {
-      font-size: 20px;
-      font-weight: bold;
-      padding: 15px;
+      font-size: 22px;
+      font-weight: 600;
+      padding: 18px;
       background-color: var(--highlight);
       color: white;
       cursor: pointer;
-      border-radius: 6px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
     }
 
     .index-container {
@@ -87,25 +98,40 @@
       border-radius: 10px;
       background-color: var(--card-bg);
       margin-top: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .session-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--highlight);
+      margin: 20px 0 10px;
+      border-left: 5px solid var(--highlight);
+      padding-left: 10px;
     }
 
     .index-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
     }
 
     .index-card {
-      background-color: var(--card-bg);
+      background-color: var(--accent-bg);
       border-radius: 12px;
       padding: 15px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+
+    .index-card:hover {
+      background-color: var(--hover-bg);
     }
 
     .index-title {
       font-weight: bold;
       color: var(--highlight);
       margin-bottom: 10px;
+      font-size: 17px;
     }
 
     .index-links a {
@@ -114,11 +140,13 @@
       align-items: center;
       text-decoration: none;
       color: var(--text-color);
-      padding: 3px 0;
+      padding: 5px 0;
     }
 
     .index-links a.highlight {
-      background-color: yellow;
+      background-color: transparent;
+      font-weight: bold;
+      color: var(--highlight);
     }
 
     .index-links a .star {
@@ -134,13 +162,15 @@
     .dark-toggle {
       display: block;
       width: fit-content;
-      margin: 40px auto 0;
-      padding: 10px 20px;
+      margin: 60px auto 0;
+      padding: 12px 24px;
       background-color: var(--highlight);
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 30px;
       cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
     }
   </style>
 </head>
@@ -148,11 +178,11 @@
   <h1>📚 기술사 키워드 인덱스</h1>
 
   <div class="tabs">
-    <button class="active" onclick="showTab('시공')">🏗️ 건축시공</button>
-    <button onclick="showTab('기계')">⚙️ 기계설비</button>
-    <button onclick="showTab('전기')">💡 전기설비</button>
-    <button onclick="showTab('소방')">🔥 소방기술</button>
-    <button onclick="showTab('정보')">📊 정보관리</button>
+    <button class="active" onclick="showTab('시공')">🏗️ 건축시공기술사</button>
+    <button onclick="showTab('기계')">⚙️ 기계설비기술사/button>
+    <button onclick="showTab('전기')">💡 전기설비기술사</button>
+    <button onclick="showTab('소방')">🔥 소방기술사</button>
+    <button onclick="showTab('정보')">📊 정보관리기술사</button>
   </div>
 
   <div class="search-container">
@@ -160,27 +190,90 @@
   </div>
 
   <div id="content">
+    <!-- 시공 기술사 -->
     <div class="accordion" data-category="시공">
       <div class="accordion-title" onclick="toggleAccordion(this)">🏗️ 건축시공기술사 키워드</div>
       <div class="index-container">
+        <div class="index-title">130회</div>
+        <div class="session-title">1교시</div>
         <div class="index-grid">
           <div class="index-card">
-            <div class="index-title">130회</div>
             <div class="index-links">
               <a href="#"><span>가설구조물</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
               <a href="#"><span>기초공법</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기계설비 기술사 -->
+    <div class="accordion" data-category="기계">
+      <div class="accordion-title" onclick="toggleAccordion(this)">⚙️ 건축기계설비기술사 키워드</div>
+      <div class="index-container">
+        <div class="index-title">128회</div>
+        <div class="session-title">2교시</div>
+        <div class="index-grid">
           <div class="index-card">
-            <div class="index-title">129회</div>
             <div class="index-links">
-              <a href="#"><span>도장공사</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+              <a href="#"><span>냉난방 부하계산</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+              <a href="#"><span>공기조화 방식</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- 동일한 구조로 다른 기술사 영역 추가 -->
+
+    <!-- 전기설비 기술사 -->
+    <div class="accordion" data-category="전기">
+      <div class="accordion-title" onclick="toggleAccordion(this)">💡 건축전기설비기술사 키워드</div>
+      <div class="index-container">
+        <div class="index-title">127회</div>
+        <div class="session-title">3교시</div>
+        <div class="index-grid">
+          <div class="index-card">
+            <div class="index-links">
+              <a href="#"><span>피뢰시스템</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+              <a href="#"><span>배선설계 기준</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 소방 기술사 -->
+    <div class="accordion" data-category="소방">
+      <div class="accordion-title" onclick="toggleAccordion(this)">🔥 소방기술사 키워드</div>
+      <div class="index-container">
+        <div class="index-title">126회</div>
+        <div class="session-title">4교시</div>
+        <div class="index-grid">
+          <div class="index-card">
+            <div class="index-links">
+              <a href="#"><span>스프링클러 헤드 설계</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+              <a href="#"><span>화재 하중</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 정보관리 기술사 -->
+    <div class="accordion" data-category="정보">
+      <div class="accordion-title" onclick="toggleAccordion(this)">📊 정보관리기술사 키워드</div>
+      <div class="index-container">
+        <div class="index-title">125회</div>
+        <div class="session-title">1교시</div>
+        <div class="index-grid">
+          <div class="index-card">
+            <div class="index-links">
+              <a href="#"><span>시스템 개발 생명주기</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+              <a href="#"><span>정보보안 프레임워크</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <button class="dark-toggle" onclick="toggleTheme()">🌙 다크모드</button>
