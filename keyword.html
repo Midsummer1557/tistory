@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>브리태니커 스타일 인덱스</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f4f4f4;
+      padding: 30px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .index-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .index-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s;
+    }
+
+    .index-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .index-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #004c8c;
+    }
+
+    .index-links a {
+      display: block;
+      text-decoration: none;
+      color: #333;
+      padding: 3px 0;
+    }
+
+    .index-links a:hover {
+      color: #0077cc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📚 기술사 키워드 인덱스</h1>
+
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">ㄱ</div>
+      <div class="index-links">
+        <a href="#가설구조물">가설구조물</a>
+        <a href="#건축전기설비">건축전기설비</a>
+        <a href="#기초공법">기초공법</a>
+      </div>
+    </div>
+
+    <div class="index-card">
+      <div class="index-title">ㄴ</div>
+      <div class="index-links">
+        <a href="#내진설계">내진설계</a>
+        <a href="#누설전류">누설전류</a>
+      </div>
+    </div>
+
+    <div class="index-card">
+      <div class="index-title">ㄷ</div>
+      <div class="index-links">
+        <a href="#도장공사">도장공사</a>
+        <a href="#단열재">단열재</a>
+      </div>
+    </div>
+
+    <!-- 추가적인 자모별 카드도 같은 형식으로 복제 가능 -->
+  </div>
+
+</body>
+</html>
