@@ -126,7 +126,6 @@
 
     .session-tabs button {
       flex: 1 1 20%;
-      background: var(--accent-bg);
       border: none;
       border-radius: 8px;
       padding: 5px 10px;
@@ -134,9 +133,13 @@
       transition: 0.3s;
     }
 
+    .session-tabs button[data-session="1"] { background: var(--session-1); }
+    .session-tabs button[data-session="2"] { background: var(--session-2); }
+    .session-tabs button[data-session="3"] { background: var(--session-3); }
+    .session-tabs button[data-session="4"] { background: var(--session-4); }
+
     .session-tabs button.active {
-      background-color: var(--highlight);
-      color: white;
+      outline: 2px solid var(--highlight);
       transform: scale(1.05);
     }
 
@@ -207,20 +210,20 @@
     const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
 
-function showTab(category) {
-  const scrollY = window.scrollY;
-  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+    function showTab(category) {
+      const scrollY = window.scrollY;
+      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
 
-  const observer = new MutationObserver(() => {
-    window.scrollTo({ top: scrollY });
-    observer.disconnect();
-  });
+      const observer = new MutationObserver(() => {
+        window.scrollTo({ top: scrollY });
+        observer.disconnect();
+      });
 
-  observer.observe(document.getElementById('content'), { childList: true, subtree: true });
+      observer.observe(document.getElementById('content'), { childList: true, subtree: true });
 
-  renderCategory(category);
-}
+      renderCategory(category);
+    }
 
     function showFavorites() {
       const container = document.getElementById('content');
@@ -264,6 +267,7 @@ function showTab(category) {
         for (let i = 1; i <= 4; i++) {
           const btn = document.createElement('button');
           btn.textContent = `${i}교시`;
+          btn.dataset.session = i;
           btn.onclick = () => showSession(card, i);
           if (i === 1) btn.classList.add('active');
           tab.appendChild(btn);
@@ -293,7 +297,7 @@ function showTab(category) {
 
     function showSession(card, session) {
       card.querySelectorAll('.session-tabs button').forEach(b => b.classList.remove('active'));
-      card.querySelectorAll(`.session-tabs button:nth-child(${session})`).forEach(b => b.classList.add('active'));
+      card.querySelectorAll(`.session-tabs button[data-session="${session}"]`).forEach(b => b.classList.add('active'));
       card.querySelectorAll('.keyword-list').forEach(k => {
         k.style.display = k.dataset.session == session ? 'block' : 'none';
       });
