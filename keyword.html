@@ -41,30 +41,37 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       font-size: 32px;
     }
 
-    .tabs, .session-tabs {
+    .subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .tabs {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin-bottom: 20px;
+      gap: 10px;
     }
 
-    .tabs button, .session-tabs button {
+    .tabs button {
       background: var(--accent-bg);
       border: none;
       color: var(--text-color);
       padding: 10px 20px;
-      margin: 5px;
       border-radius: 30px;
       cursor: pointer;
       font-weight: 500;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    .tabs button.active, .session-tabs button.active {
+    .tabs button.active {
       background-color: var(--highlight);
       color: white;
     }
@@ -174,6 +181,7 @@
 </head>
 <body>
   <h1>📚 기술사 키워드 인덱스</h1>
+  <div class="subtitle">한번에 합격하는 기술사 키워드 총정리</div>
 
   <div class="tabs">
     <button class="active" onclick="showTab('시공')">🏗️ 건축시공</button>
@@ -181,6 +189,7 @@
     <button onclick="showTab('전기')">💡 전기설비</button>
     <button onclick="showTab('소방')">🔥 소방기술</button>
     <button onclick="showTab('정보')">📊 정보관리</button>
+    <button onclick="showFavorites()">⭐ 즐겨찾기</button>
   </div>
 
   <div class="search-container">
@@ -199,6 +208,38 @@
           2: ["도장공사", "콘크리트양생"],
           3: ["철근시공", "슬래브"],
           4: ["방수공법", "적산기법"]
+        }
+      },
+      기계: {
+        "128회": {
+          1: ["기계환기", "에너지절감"],
+          2: ["열교환기", "냉방부하계산"],
+          3: ["펌프종류", "배관시스템"],
+          4: ["덕트설계", "흡음설비"]
+        }
+      },
+      전기: {
+        "127회": {
+          1: ["피뢰시스템", "절연협조"],
+          2: ["조명설계", "고조파 대책"],
+          3: ["전압강하", "수배전반"],
+          4: ["케이블 포설", "접지시스템"]
+        }
+      },
+      소방: {
+        "126회": {
+          1: ["화재하중", "스프링클러"],
+          2: ["감지기 종류", "소화기 종류"],
+          3: ["배연설비", "피난계획"],
+          4: ["방화구획", "자동화재탐지"]
+        }
+      },
+      정보: {
+        "125회": {
+          1: ["정보보안 개념", "클라우드 아키텍처"],
+          2: ["DB 정규화", "빅데이터 처리"],
+          3: ["SW 개발 프로세스", "애자일 방법론"],
+          4: ["IoT 구조", "API 설계"]
         }
       }
     };
@@ -284,6 +325,29 @@
       favorites[keyword] = !favorites[keyword];
       localStorage.setItem('favorites', JSON.stringify(favorites));
       renderContent(document.querySelector('.tabs button.active').textContent.replace(/[^가-힣]/g, ''));
+    }
+
+    function showFavorites() {
+      const container = document.getElementById("content");
+      container.innerHTML = '<h2 style="text-align:center">⭐ 즐겨찾기 키워드</h2>';
+      const keywords = Object.keys(favorites).filter(k => favorites[k]);
+      if (keywords.length === 0) {
+        container.innerHTML += '<p style="text-align:center">즐겨찾기한 키워드가 없습니다.</p>';
+        return;
+      }
+      const grid = document.createElement("div");
+      grid.className = "index-grid";
+      keywords.forEach(k => {
+        const card = document.createElement("div");
+        card.className = "index-card session-1";
+        card.innerHTML = `<div class="index-links">
+          <a href="#" class="favorited" onclick="toggleFavorite(event, '${k}')">
+            <span>${k}</span><span class="star">★</span>
+          </a>
+        </div>`;
+        grid.appendChild(card);
+      });
+      container.appendChild(grid);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
