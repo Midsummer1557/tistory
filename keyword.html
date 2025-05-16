@@ -211,6 +211,7 @@
   window.onload = () => {
     document.querySelectorAll('.index-links a').forEach(el => {
       const key = el.dataset.key;
+      el.setAttribute('target', '_blank');
       const count = parseInt(localStorage.getItem(key) || "0");
       if (count > 0) updateVisual(el, count);
     });
