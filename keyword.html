@@ -265,27 +265,26 @@
 
 
   /* 프로그레스바*/
-  function updateAllProgressBars() {
-    document.querySelectorAll('.section-title').forEach(titleEl => {
-      const field = titleEl.textContent.trim();
-      const container = titleEl.nextElementSibling;
-      const progressWrapper = document.getElementById('progress-' + titleEl.dataset.id);
-      if (!progressWrapper || !container) return;
+function updateAllProgressBars() {
+  document.querySelectorAll('.section-title').forEach(titleEl => {
+    const field = titleEl.textContent.trim();
+    const progressWrapper = document.getElementById('progress-' + titleEl.dataset.id);
+    const container = progressWrapper?.nextElementSibling;
+    if (!progressWrapper || !container) return;
 
-      let totalClicks = 0;
-      container.querySelectorAll('a[data-key]').forEach(a => {
-        const key = a.dataset.key;
-        totalClicks += parseInt(localStorage.getItem(key) || "0");
-      });
-
-      const percent = Math.min(100, Math.round(totalClicks / 10));
-      const fill = progressWrapper.querySelector('.progress-fill');
-      const label = progressWrapper.querySelector('.progress-percent');
-      if (fill) fill.style.width = `${percent}%`;
-      if (label) label.textContent = `${percent}% (${totalClicks}회 클릭)`;
+    let totalClicks = 0;
+    container.querySelectorAll('a[data-key]').forEach(a => {
+      const key = a.dataset.key;
+      totalClicks += parseInt(localStorage.getItem(key) || "0");
     });
-  }
 
+    const percent = Math.min(100, Math.round(totalClicks / 10));
+    const fill = progressWrapper.querySelector('.progress-fill');
+    const label = progressWrapper.querySelector('.progress-percent');
+    if (fill) fill.style.width = `${percent}%`;
+    if (label) label.textContent = `${percent}% (${totalClicks}회 클릭)`;
+  });
+}
 
 
 
