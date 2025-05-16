@@ -82,7 +82,7 @@
     }
 
     .index-container {
-      display: none;
+      display: block;
       padding: 20px;
       border-radius: 10px;
       background-color: var(--card-bg);
@@ -109,7 +109,9 @@
     }
 
     .index-links a {
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       text-decoration: none;
       color: var(--text-color);
       padding: 3px 0;
@@ -119,11 +121,21 @@
       background-color: yellow;
     }
 
+    .index-links a .star {
+      font-size: 14px;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .index-links a.favorited .star {
+      color: gold;
+    }
+
     .dark-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 8px 16px;
+      display: block;
+      width: fit-content;
+      margin: 40px auto 0;
+      padding: 10px 20px;
       background-color: var(--highlight);
       color: white;
       border: none;
@@ -133,15 +145,14 @@
   </style>
 </head>
 <body>
-  <button class="dark-toggle" onclick="toggleTheme()">🌙 다크모드</button>
   <h1>📚 기술사 키워드 인덱스</h1>
 
   <div class="tabs">
-    <button class="active" onclick="showTab('시공')">건축시공기술사</button>
-    <button onclick="showTab('기계')">건축기계설비기술사</button>
-    <button onclick="showTab('전기')">건축전기설비기술사</button>
-    <button onclick="showTab('소방')">소방기술사</button>
-    <button onclick="showTab('정보')">정보관리기술사</button>
+    <button class="active" onclick="showTab('시공')">🏗️ 건축시공</button>
+    <button onclick="showTab('기계')">⚙️ 기계설비</button>
+    <button onclick="showTab('전기')">💡 전기설비</button>
+    <button onclick="showTab('소방')">🔥 소방기술</button>
+    <button onclick="showTab('정보')">📊 정보관리</button>
   </div>
 
   <div class="search-container">
@@ -154,76 +165,25 @@
       <div class="index-container">
         <div class="index-grid">
           <div class="index-card">
-            <div class="index-title">ㄱ</div>
+            <div class="index-title">130회</div>
             <div class="index-links">
-              <a href="#">가설구조물</a>
-              <a href="#">기초공법</a>
+              <a href="#"><span>가설구조물</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
+              <a href="#"><span>기초공법</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion" data-category="기계" style="display:none">
-      <div class="accordion-title" onclick="toggleAccordion(this)">🛠️ 건축기계설비기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-grid">
           <div class="index-card">
-            <div class="index-title">ㄴ</div>
+            <div class="index-title">129회</div>
             <div class="index-links">
-              <a href="#">냉난방시스템</a>
-              <a href="#">누수진단</a>
+              <a href="#"><span>도장공사</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="accordion" data-category="전기" style="display:none">
-      <div class="accordion-title" onclick="toggleAccordion(this)">💡 건축전기설비기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-grid">
-          <div class="index-card">
-            <div class="index-title">ㅅ</div>
-            <div class="index-links">
-              <a href="#">수배전반</a>
-              <a href="#">선로보호</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion" data-category="소방" style="display:none">
-      <div class="accordion-title" onclick="toggleAccordion(this)">🔥 소방기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-grid">
-          <div class="index-card">
-            <div class="index-title">ㅅ</div>
-            <div class="index-links">
-              <a href="#">스프링클러</a>
-              <a href="#">소화기구</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion" data-category="정보" style="display:none">
-      <div class="accordion-title" onclick="toggleAccordion(this)">📊 정보관리기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-grid">
-          <div class="index-card">
-            <div class="index-title">ㅈ</div>
-            <div class="index-links">
-              <a href="#">정보보안</a>
-              <a href="#">자료구조</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- 동일한 구조로 다른 기술사 영역 추가 -->
   </div>
+
+  <button class="dark-toggle" onclick="toggleTheme()">🌙 다크모드</button>
 
   <script>
     function toggleAccordion(el) {
@@ -242,7 +202,8 @@
     function filterKeywords() {
       const input = document.getElementById('searchInput').value.toLowerCase();
       document.querySelectorAll('.index-links a').forEach(link => {
-        if (link.textContent.toLowerCase().includes(input)) {
+        const text = link.textContent.toLowerCase();
+        if (text.includes(input)) {
           link.classList.add('highlight');
         } else {
           link.classList.remove('highlight');
@@ -253,6 +214,12 @@
     function toggleTheme() {
       const current = document.documentElement.getAttribute('data-theme');
       document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    }
+
+    function toggleFavorite(e, el) {
+      e.preventDefault();
+      const link = el.parentElement;
+      link.classList.toggle('favorited');
     }
   </script>
 </body>
