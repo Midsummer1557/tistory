@@ -181,61 +181,52 @@
     </div>
   </div>
 
-  <script>
-    function trackClick(el) {
+
+
+
+
+  
+<script>
+  function trackClick(el) {
+    const key = el.dataset.key;
+    let count = parseInt(localStorage.getItem(key) || "0");
+    count++;
+    localStorage.setItem(key, count);
+    updateVisual(el, count);
+  }
+
+  function updateVisual(el, count) {
+    el.classList.remove("click-1", "click-3", "click-5");
+
+    let emoji = '';
+    if (count >= 5) {
+      el.classList.add("click-5");
+      emoji = '🎓';
+    } else if (count >= 3) {
+      el.classList.add("click-3");
+      emoji = '⭐';
+    } else if (count >= 1) {
+      el.classList.add("click-1");
+      emoji = '🔥';
+    }
+
+    const span = el.querySelector('.click-count');
+    if (span) {
+      span.textContent = `${count} ${emoji}`;
+    }
+  }
+
+  window.onload = () => {
+    document.querySelectorAll('.index-links a').forEach(el => {
       const key = el.dataset.key;
-      let count = parseInt(localStorage.getItem(key) || "0");
-      count++;
-      localStorage.setItem(key, count);
-      updateVisual(el, count);
-    }
-
-
-    
-function updateVisual(el, count) {
-  el.classList.remove("click-1", "click-3", "click-5");
-
-  // 이모지 조건 정의
-  let emoji = '';
-  if (count >= 5) {
-    el.classList.add("click-5");
-    emoji = '🎓';
-  } else if (count >= 3) {
-    el.classList.add("click-3");
-    emoji = '⭐';
-  } else if (count >= 1) {
-    el.classList.add("click-1");
-    emoji = '🔥';
-  }
-
-  // 숫자 갱신 (괄호 없이, 이모지 포함)
-  const span = el.querySelector('.click-count');
-  if (span) {
-    span.textContent = `${count} ${emoji}`;
-  }
-}
+      const count = parseInt(localStorage.getItem(key) || "0");
+      if (count > 0) updateVisual(el, count);
+    });
+  };
+</script>
 
 
 
-
-
-
-
-
-
-
-      
-const span = el.querySelector('.click-count');
-if (span) span.textContent = count;
-    }
-
-window.onload = () => {
-  document.querySelectorAll('.index-links a').forEach(el => {
-    const keyword = el.textContent.split(' ')[0].trim();
-    const count = parseInt(localStorage.getItem(keyword) || "0");
-    if (count > 0) updateVisual(el, count);
-  });
-};
-  </script>
+  
 </body>
 </html>
