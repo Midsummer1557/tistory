@@ -174,36 +174,40 @@
     </div>
   </div>
 
-  <script>
-    function trackClick(el) {
-      const key = el.textContent.trim();
-      let count = parseInt(localStorage.getItem(key) || "0");
-      count++;
-      localStorage.setItem(key, count);
+<script>
+  function trackClick(el) {
+    const keyword = el.textContent.split(' ')[0].trim();
+    let count = parseInt(localStorage.getItem(keyword) || "0");
+    count++;
+    localStorage.setItem(keyword, count);
+    updateVisual(el, count);
+  }
 
-      el.classList.remove("click-1", "click-3", "click-5");
+  function updateVisual(el, count) {
+    el.classList.remove("click-1", "click-3", "click-5");
 
-      if (count >= 5) el.classList.add("click-5");
-      else if (count >= 3) el.classList.add("click-3");
-      else el.classList.add("click-1");
-
-      const countSpan = el.querySelector(".click-count");
-      if (countSpan) countSpan.textContent = count;
+    if (count >= 5) {
+      el.classList.add("click-5");
+    } else if (count >= 3) {
+      el.classList.add("click-3");
+    } else if (count >= 1) {
+      el.classList.add("click-1");
     }
 
-    window.onload = () => {
-      document.querySelectorAll('.index-links a').forEach(el => {
-        const key = el.textContent.trim();
-        const count = parseInt(localStorage.getItem(key) || "0");
+    const span = el.querySelector('.count');
+    if (span) span.textContent = `(${count})`;
+  }
 
-        if (count >= 5) el.classList.add("click-5");
-        else if (count >= 3) el.classList.add("click-3");
-        else if (count >= 1) el.classList.add("click-1");
+  window.onload = () => {
+    document.querySelectorAll('.index-links a').forEach(el => {
+      const keyword = el.textContent.split(' ')[0].trim();
+      const count = parseInt(localStorage.getItem(keyword) || "0");
+      if (count > 0) updateVisual(el, count);
+    });
+  };
+</script>
 
-        const countSpan = el.querySelector(".click-count");
-        if (countSpan) countSpan.textContent = count;
-      });
-    };
-  </script>
+
+  
 </body>
 </html>
