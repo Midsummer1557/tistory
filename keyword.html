@@ -190,17 +190,41 @@
       updateVisual(el, count);
     }
 
-    function updateVisual(el, count) {
-      el.classList.remove("click-1", "click-3", "click-5");
 
-      if (count >= 5) {
-        el.classList.add("click-5");
-      } else if (count >= 3) {
-        el.classList.add("click-3");
-      } else if (count >= 1) {
-        el.classList.add("click-1");
-      }
+    
+function updateVisual(el, count) {
+  el.classList.remove("click-1", "click-3", "click-5");
 
+  // 이모지 조건 정의
+  let emoji = '';
+  if (count >= 5) {
+    el.classList.add("click-5");
+    emoji = '🎓';
+  } else if (count >= 3) {
+    el.classList.add("click-3");
+    emoji = '⭐';
+  } else if (count >= 1) {
+    el.classList.add("click-1");
+    emoji = '🔥';
+  }
+
+  // 숫자 갱신 (괄호 없이, 이모지 포함)
+  const span = el.querySelector('.click-count');
+  if (span) {
+    span.textContent = `${count} ${emoji}`;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+      
 const span = el.querySelector('.click-count');
 if (span) span.textContent = count;
     }
