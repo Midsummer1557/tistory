@@ -145,7 +145,8 @@
 
   <div class="tabs">
     <button class="active" onclick="showTab('시공')">건축시공</button>
-    <!-- 예시로 시공만 구현, 다른 탭은 원하면 추가 -->
+    <button onclick="showTab('전기')">전기설비</button>
+    <button onclick="showTab('소방')">소방기술</button>
   </div>
 
   <div id="content" class="index-container"></div>
@@ -169,6 +170,46 @@
           4: [
             { text: '방수공법', url: 'https://ko.wikipedia.org/wiki/방수' },
             { text: '적산기법', url: 'https://ko.wikipedia.org/wiki/적산' }
+          ]
+        }
+      },
+      전기: {
+        '130회': {
+          1: [
+            { text: '전기이론', url: 'https://ko.wikipedia.org/wiki/전기' },
+            { text: '기초회로', url: 'https://ko.wikipedia.org/wiki/전자_회로' }
+          ],
+          2: [
+            { text: '배선설계', url: 'https://ko.wikipedia.org/wiki/배선' },
+            { text: '전선관공사', url: 'https://ko.wikipedia.org/wiki/전선' }
+          ],
+          3: [
+            { text: '조명설비', url: 'https://ko.wikipedia.org/wiki/조명' },
+            { text: '동력설비', url: 'https://ko.wikipedia.org/wiki/동력' }
+          ],
+          4: [
+            { text: '접지방식', url: 'https://ko.wikipedia.org/wiki/접지' },
+            { text: '피뢰시스템', url: 'https://ko.wikipedia.org/wiki/피뢰침' }
+          ]
+        }
+      },
+      소방: {
+        '130회': {
+          1: [
+            { text: '화재이론', url: 'https://ko.wikipedia.org/wiki/화재' },
+            { text: '연소메커니즘', url: 'https://ko.wikipedia.org/wiki/연소' }
+          ],
+          2: [
+            { text: '스프링클러', url: 'https://ko.wikipedia.org/wiki/스프링클러_설비' },
+            { text: '옥내소화전', url: 'https://ko.wikipedia.org/wiki/소화전' }
+          ],
+          3: [
+            { text: '경보설비', url: 'https://ko.wikipedia.org/wiki/경보' },
+            { text: '비상방송', url: 'https://ko.wikipedia.org/wiki/비상방송' }
+          ],
+          4: [
+            { text: '방염처리', url: 'https://ko.wikipedia.org/wiki/방염' },
+            { text: '내화구조', url: 'https://ko.wikipedia.org/wiki/내화' }
           ]
         }
       }
