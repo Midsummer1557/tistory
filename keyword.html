@@ -207,9 +207,11 @@
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
 
     function showTab(category) {
+      const scrollY = window.scrollY;
       document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
       renderCategory(category);
+      setTimeout(() => window.scrollTo({ top: scrollY }), 0);
     }
 
     function showFavorites() {
