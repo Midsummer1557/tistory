@@ -350,10 +350,10 @@ function showTab(category) {
       container.innerHTML = searchHistory.map(q => `<span>${q}</span>`).join('');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      renderCategory('시공');
-      renderSearchHistory();
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  showTab('시공');
+  renderSearchHistory();
+});
   </script>
 </body>
 </html>
