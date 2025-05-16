@@ -127,7 +127,6 @@
       text-decoration: none;
       border-bottom: none;
     }
-    /* 다크모드 스타일 */
     body.dark {
       --bg-color: #181d27;
       --text-color: #e4e4ea;
@@ -140,7 +139,6 @@
       --session-4: #362c35;
     }
     body.dark .subtitle { color: #aaa; }
-    /* 다크모드 버튼 스타일 */
     .dark-toggle {
       position: fixed;
       left: 50%;
@@ -170,12 +168,12 @@
   <div class="subtitle">한번에 합격하는 기술사 키워드 총정리</div>
 
   <div class="tabs">
-    <button class="active" onclick="showTab('시공')">건축시공</button>
-    <button onclick="showTab('전기')">전기설비</button>
-    <button onclick="showTab('소방')">소방기술</button>
-    <button onclick="showTab('기계')">기계설비</button>
-    <button onclick="showTab('정보')">정보관리</button>
-    <button onclick="showTab('즐겨찾기')">⭐ 즐겨찾기</button>
+    <button class="active" onclick="showTab('시공', event)">건축시공</button>
+    <button onclick="showTab('전기', event)">전기설비</button>
+    <button onclick="showTab('소방', event)">소방기술</button>
+    <button onclick="showTab('기계', event)">기계설비</button>
+    <button onclick="showTab('정보', event)">정보관리</button>
+    <button onclick="showTab('즐겨찾기', event)">⭐ 즐겨찾기</button>
   </div>
 
   <div id="content" class="index-container"></div>
@@ -369,7 +367,7 @@
       });
     }
 
-    function showTab(category) {
+    function showTab(category, event) {
       document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
       renderCategory(category);
