@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>기술사 브리태니커 스타일 인덱스</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>기술사 브리태니커 인덱스</title>
   <style>
     :root {
       --bg-color: #f9fafb;
@@ -11,24 +11,10 @@
       --card-bg: #ffffff;
       --highlight: #2f80ed;
       --accent-bg: #ecf3ff;
-      --hover-bg: #dbeaff;
       --session-1: #e6f0ff;
       --session-2: #e8f5e9;
       --session-3: #fff8e1;
       --session-4: #fce4ec;
-    }
-
-    [data-theme="dark"] {
-      --bg-color: #121212;
-      --text-color: #e0e0e0;
-      --card-bg: #1e1e1e;
-      --highlight: #4dabf7;
-      --accent-bg: #1a2b3c;
-      --hover-bg: #2a3b4c;
-      --session-1: #1e2f40;
-      --session-2: #1f3f30;
-      --session-3: #3e3a1f;
-      --session-4: #3d2a35;
     }
 
     body {
@@ -42,57 +28,49 @@
     h1 {
       text-align: center;
       margin-bottom: 10px;
-      font-size: 32px;
     }
 
     .subtitle {
       text-align: center;
-      font-size: 16px;
+      font-size: 14px;
       color: #666;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .tabs {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 20px;
       gap: 10px;
+      margin-bottom: 20px;
     }
 
-    .tabs button, .session-tabs button {
+    .tabs button {
       background: var(--accent-bg);
       border: none;
       color: var(--text-color);
       padding: 10px 20px;
-      border-radius: 30px;
+      border-radius: 20px;
       cursor: pointer;
-      font-weight: 500;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      font-weight: bold;
     }
 
-    .tabs button.active, .session-tabs button.active {
-      background-color: var(--highlight) !important;
-      color: white !important;
-      transform: scale(1.05);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    .tabs button.active {
+      background-color: var(--highlight);
+      color: white;
     }
 
     .search-container {
       text-align: center;
-      margin: 20px 0;
+      margin-bottom: 20px;
     }
 
     .search-container input {
-      padding: 12px;
       width: 90%;
-      max-width: 420px;
+      max-width: 400px;
+      padding: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
-      font-size: 16px;
-      background-color: var(--card-bg);
-      color: var(--text-color);
     }
 
     .search-history {
@@ -112,104 +90,73 @@
       font-size: 13px;
     }
 
-    .accordion {
-      margin-bottom: 30px;
-    }
-
-    .accordion-title {
-      font-size: 22px;
-      font-weight: 600;
-      padding: 18px;
-      background-color: var(--highlight);
-      color: white;
-      cursor: pointer;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-    }
-
     .index-container {
-      display: block;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: var(--card-bg);
-      margin-top: 10px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    }
-
-    .session-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .index-grid {
       display: grid;
-      grid-template-columns: repeat(1, 1fr); /* mobile */
-      gap: 20px;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 30px;
     }
 
     @media (min-width: 1024px) {
-      .index-grid {
-        grid-template-columns: repeat(3, 1fr); /* desktop */
+      .index-container {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
     .index-card {
+      background: var(--card-bg);
       border-radius: 12px;
-      padding: 15px;
-      transition: all 0.3s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
     }
-
-    .session-1 { background-color: var(--session-1); }
-    .session-2 { background-color: var(--session-2); }
-    .session-3 { background-color: var(--session-3); }
-    .session-4 { background-color: var(--session-4); }
 
     .index-title {
       font-weight: bold;
-      color: var(--highlight);
+      font-size: 18px;
       margin-bottom: 10px;
-      font-size: 17px;
+      color: var(--highlight);
     }
 
-    .index-links a {
+    .session-tabs {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      text-decoration: none;
-      color: var(--text-color);
-      padding: 5px 0;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 5px;
     }
 
-    .index-links a.highlight {
-      font-weight: bold;
-      color: var(--highlight);
+    .session-tabs button {
+      flex: 1 1 20%;
+      background: var(--accent-bg);
+      border: none;
+      border-radius: 8px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .index-links a .star {
-      font-size: 14px;
+    .session-tabs button.active {
+      background-color: var(--highlight);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .keyword-list {
+      margin-top: 10px;
+    }
+
+    .keyword {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+
+    .keyword .star {
       cursor: pointer;
       color: #ccc;
     }
 
-    .index-links a.favorited .star {
+    .keyword.favorited .star {
       color: gold;
-    }
-
-    .dark-toggle {
-      display: block;
-      width: fit-content;
-      margin: 60px auto 0;
-      padding: 12px 24px;
-      background-color: var(--highlight);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 500;
     }
   </style>
 </head>
@@ -218,31 +165,40 @@
   <div class="subtitle">한번에 합격하는 기술사 키워드 총정리</div>
 
   <div class="tabs">
-    <button class="active" onclick="showTab('시공')">🏗️ 건축시공</button>
-    <button onclick="showTab('기계')">⚙️ 기계설비</button>
-    <button onclick="showTab('전기')">💡 전기설비</button>
-    <button onclick="showTab('소방')">🔥 소방기술</button>
-    <button onclick="showTab('정보')">📊 정보관리</button>
+    <button class="active" onclick="showTab('시공')">건축시공</button>
+    <button onclick="showTab('전기')">전기설비</button>
+    <button onclick="showTab('소방')">소방기술</button>
+    <button onclick="showTab('정보')">정보관리</button>
     <button onclick="showFavorites()">⭐ 즐겨찾기</button>
   </div>
 
   <div class="search-container">
-    <input type="text" id="searchInput" onkeyup="filterKeywords()" placeholder="키워드 검색...">
+    <input type="text" id="searchInput" placeholder="키워드 검색..." onkeyup="filterKeywords()" />
   </div>
   <div id="searchHistory" class="search-history"></div>
 
-  <div id="content"></div>
-
-  <button class="dark-toggle" onclick="toggleTheme()">🌙 다크모드</button>
+  <div id="content" class="index-container"></div>
 
   <script>
     const data = {
       시공: {
-        "130회": {
-          1: ["가설구조물", "기초공법"],
-          2: ["도장공사", "콘크리트양생"],
-          3: ["철근시공", "슬래브"],
-          4: ["방수공법", "적산기법"]
+        '130회': {
+          1: ['가설구조물', '기초공법'],
+          2: ['도장공사', '콘크리트양생'],
+          3: ['철근시공', '슬래브'],
+          4: ['방수공법', '적산기법']
+        },
+        '131회': {
+          1: ['조적공사', '건축재료'],
+          2: ['파일기초', '흙막이'],
+          3: ['단열재', '시공계획'],
+          4: ['건축법규', '품질관리']
+        },
+        '132회': {
+          1: ['지반조사', '건설안전'],
+          2: ['건축시공기술', '양생방법'],
+          3: ['마감재', '설계도서'],
+          4: ['공정관리', '공사비산정']
         }
       }
     };
@@ -250,61 +206,94 @@
     const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
 
-    function renderContent(category) {
-      const container = document.getElementById("content");
-      container.innerHTML = "";
-      const sets = data[category];
-      for (const session in sets) {
-        const accordion = document.createElement("div");
-        accordion.className = "accordion";
-        accordion.setAttribute("data-category", category);
-
-        accordion.innerHTML = `
-          <div class="accordion-title" onclick="toggleAccordion(this)">${session} ${category} 기술사</div>
-          <div class="index-container">
-            <div class="session-tabs">
-              <button onclick="showSession(this, 1)">1교시</button>
-              <button onclick="showSession(this, 2)">2교시</button>
-              <button onclick="showSession(this, 3)">3교시</button>
-              <button onclick="showSession(this, 4)">4교시</button>
-            </div>
-            <div class="index-grid">
-              ${Object.entries(sets[session]).map(([s, keywords]) => `
-                <div class="index-card session-${s}" data-session="${s}" style="display:${s == 1 ? 'block' : 'none'}">
-                  <div class="index-title">${s}교시</div>
-                  <div class="index-links">
-                    ${keywords.map(k => `
-                      <a href="#" class="${favorites[k] ? 'favorited' : ''}" onclick="toggleFavorite(event, '${k}')">
-                        <span>${k}</span>
-                        <span class="star">★</span>
-                      </a>`).join('')}
-                  </div>
-                </div>`).join('')}
-            </div>
-          </div>
-        `;
-        container.appendChild(accordion);
-      }
-    }
-
-    function toggleAccordion(el) {
-      const content = el.nextElementSibling;
-      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
-    }
-
     function showTab(category) {
       document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
-      renderContent(category);
+      renderCategory(category);
     }
 
-    function showSession(el, num) {
-      const parent = el.closest('.index-container');
-      parent.querySelectorAll('.session-tabs button').forEach(b => b.classList.remove('active'));
-      el.classList.add('active');
-      parent.querySelectorAll('.index-card').forEach(card => {
-        card.style.display = card.getAttribute('data-session') == num ? 'block' : 'none';
+    function showFavorites() {
+      const container = document.getElementById('content');
+      container.innerHTML = '';
+      const keywords = Object.keys(favorites).filter(k => favorites[k]);
+      if (keywords.length === 0) {
+        container.innerHTML = '<p style="text-align:center">즐겨찾기한 키워드가 없습니다.</p>';
+        return;
+      }
+
+      const card = document.createElement('div');
+      card.className = 'index-card';
+      card.innerHTML = `<div class="index-title">⭐ 즐겨찾기</div>`;
+      const list = document.createElement('div');
+      list.className = 'keyword-list';
+      keywords.forEach(k => {
+        const item = document.createElement('div');
+        item.className = 'keyword favorited';
+        item.innerHTML = `<span>${k}</span><span class="star" onclick="toggleFavorite(event, '${k}')">★</span>`;
+        list.appendChild(item);
       });
+      card.appendChild(list);
+      container.appendChild(card);
+    }
+
+    function renderCategory(category) {
+      const container = document.getElementById('content');
+      container.innerHTML = '';
+      const items = data[category];
+      for (const session in items) {
+        const card = document.createElement('div');
+        card.className = 'index-card';
+
+        const title = document.createElement('div');
+        title.className = 'index-title';
+        title.textContent = `${session}`;
+        card.appendChild(title);
+
+        const tab = document.createElement('div');
+        tab.className = 'session-tabs';
+        for (let i = 1; i <= 4; i++) {
+          const btn = document.createElement('button');
+          btn.textContent = `${i}교시`;
+          btn.onclick = () => showSession(card, i);
+          if (i === 1) btn.classList.add('active');
+          tab.appendChild(btn);
+        }
+        card.appendChild(tab);
+
+        for (let i = 1; i <= 4; i++) {
+          const list = document.createElement('div');
+          list.className = 'keyword-list';
+          list.dataset.session = i;
+          if (i !== 1) list.style.display = 'none';
+
+          items[session][i].forEach(keyword => {
+            const item = document.createElement('div');
+            item.className = 'keyword';
+            if (favorites[keyword]) item.classList.add('favorited');
+            item.innerHTML = `<span>${keyword}</span><span class="star" onclick="toggleFavorite(event, '${keyword}')">★</span>`;
+            list.appendChild(item);
+          });
+
+          card.appendChild(list);
+        }
+
+        container.appendChild(card);
+      }
+    }
+
+    function showSession(card, session) {
+      card.querySelectorAll('.session-tabs button').forEach(b => b.classList.remove('active'));
+      card.querySelectorAll(`.session-tabs button:nth-child(${session})`).forEach(b => b.classList.add('active'));
+      card.querySelectorAll('.keyword-list').forEach(k => {
+        k.style.display = k.dataset.session == session ? 'block' : 'none';
+      });
+    }
+
+    function toggleFavorite(e, keyword) {
+      e.preventDefault();
+      favorites[keyword] = !favorites[keyword];
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      renderCategory(document.querySelector('.tabs button.active').textContent.trim());
     }
 
     function filterKeywords() {
@@ -313,63 +302,22 @@
         searchHistory.unshift(input);
         if (searchHistory.length > 10) searchHistory.pop();
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        renderSearchHistory();
       }
-      document.querySelectorAll('.index-links a').forEach(link => {
-        const text = link.textContent.toLowerCase();
-        if (text.includes(input)) {
-          link.classList.add('highlight');
-        } else {
-          link.classList.remove('highlight');
-        }
+
+      document.querySelectorAll('.keyword').forEach(el => {
+        const text = el.textContent.toLowerCase();
+        el.style.display = text.includes(input) ? 'flex' : 'none';
       });
-      renderSearchHistory();
     }
 
     function renderSearchHistory() {
       const container = document.getElementById('searchHistory');
-      if (!container) return;
       container.innerHTML = searchHistory.map(q => `<span>${q}</span>`).join('');
     }
 
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme');
-      document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
-    }
-
-    function toggleFavorite(e, keyword) {
-      e.preventDefault();
-      favorites[keyword] = !favorites[keyword];
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      const currentCategory = document.querySelector('.tabs button.active')?.textContent?.replace(/[^가-힣]/g, '') || '';
-      if (currentCategory) renderContent(currentCategory);
-      else showFavorites();
-    }
-
-    function showFavorites() {
-      const container = document.getElementById("content");
-      container.innerHTML = '<h2 style="text-align:center">⭐ 즐겨찾기 키워드</h2>';
-      const keywords = Object.keys(favorites).filter(k => favorites[k]);
-      if (keywords.length === 0) {
-        container.innerHTML += '<p style="text-align:center">즐겨찾기한 키워드가 없습니다.</p>';
-        return;
-      }
-      const grid = document.createElement("div");
-      grid.className = "index-grid";
-      keywords.forEach(k => {
-        const card = document.createElement("div");
-        card.className = "index-card session-1";
-        card.innerHTML = `<div class="index-links">
-          <a href="#" class="favorited" onclick="toggleFavorite(event, '${k}')">
-            <span>${k}</span><span class="star">★</span>
-          </a>
-        </div>`;
-        grid.appendChild(card);
-      });
-      container.appendChild(grid);
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
-      renderContent('시공');
+      renderCategory('시공');
       renderSearchHistory();
     });
   </script>
