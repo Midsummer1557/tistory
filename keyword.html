@@ -229,13 +229,13 @@ const span = el.querySelector('.click-count');
 if (span) span.textContent = count;
     }
 
-    window.onload = () => {
-      document.querySelectorAll('.index-links a').forEach(el => {
-        const key = el.dataset.key;
-        const count = parseInt(localStorage.getItem(key) || "0");
-        if (count > 0) updateVisual(el, count);
-      });
-    };
+window.onload = () => {
+  document.querySelectorAll('.index-links a').forEach(el => {
+    const keyword = el.textContent.split(' ')[0].trim();
+    const count = parseInt(localStorage.getItem(keyword) || "0");
+    if (count > 0) updateVisual(el, count);
+  });
+};
   </script>
 </body>
 </html>
