@@ -1,8 +1,9 @@
+<!-- 기술사 인덱스 - 전체 샘플 컨텐츠 포함 HTML -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>브리태니커 스타일 기술사 인덱스</title>
+  <title>기술사 기출 서브노트</title>
   <style>
     body {
       font-family: 'Noto Sans KR', sans-serif;
@@ -10,12 +11,10 @@
       padding: 30px;
       margin: 0;
     }
-
     h1 {
       text-align: center;
       margin-bottom: 50px;
     }
-
     .subtitle {
       text-align: center;
       font-size: 14px;
@@ -23,7 +22,6 @@
       margin: 0 auto 20px auto;
       width: fit-content;
     }
-
     .section-title {
       font-size: 24px;
       font-weight: bold;
@@ -33,7 +31,6 @@
       border-left: 6px solid #007acc;
       padding-left: 12px;
     }
-
     .index-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -41,7 +38,6 @@
       max-width: 1200px;
       margin: 0 auto 60px auto;
     }
-
     .index-card {
       background-color: white;
       border-radius: 12px;
@@ -49,18 +45,15 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       transition: transform 0.2s;
     }
-
     .index-card:hover {
       transform: translateY(-4px);
     }
-
     .index-title {
       font-weight: bold;
       font-size: 18px;
       margin-bottom: 10px;
       color: #004c8c;
     }
-
     .index-links a {
       display: flex;
       justify-content: space-between;
@@ -70,15 +63,12 @@
       padding: 3px 0;
       transition: color 0.3s;
     }
-
     .index-links a:hover {
       color: #0077cc;
     }
-
     .click-1 { color: #1565c0; }
     .click-3 { color: #ff8f00; }
     .click-5 { color: #d32f2f; }
-
     .click-count {
       font-size: 12px;
       background: #eee;
@@ -90,11 +80,10 @@
   </style>
 </head>
 <body>
-
   <h1>📚 기술사 기출 서브노트</h1>
   <div class="subtitle">제가 공부하려고 만든 서브노트입니다.</div>
 
-  <!-- 예시: 건축시공기술사 -->
+  <!-- 기술사별 섹션 시작 -->
   <div class="section-title">🏗️ 건축시공기술사</div>
   <div class="index-container">
     <div class="index-card">
@@ -108,52 +97,113 @@
       <div class="index-title">추천</div>
       <div class="index-links">
         <a href="#도장공사" onclick="trackClick(this)">도장공사<span class="click-count">0</span></a>
-        <a href="#철근콘크리트" onclick="trackClick(this)">철근콘크리트<span class="click-count">0</span></a>
+        <a href="#슬래브시공" onclick="trackClick(this)">슬래브시공<span class="click-count">0</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">⚙️ 건축기계설비기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">필수</div>
+      <div class="index-links">
+        <a href="#펌프종류" onclick="trackClick(this)">펌프종류<span class="click-count">0</span></a>
+        <a href="#냉난방시스템" onclick="trackClick(this)">냉난방시스템<span class="click-count">0</span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#배관설계" onclick="trackClick(this)">배관설계<span class="click-count">0</span></a>
+        <a href="#에너지절약기법" onclick="trackClick(this)">에너지절약기법<span class="click-count">0</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">💡 건축전기설비기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">필수</div>
+      <div class="index-links">
+        <a href="#배선설계" onclick="trackClick(this)">배선설계<span class="click-count">0</span></a>
+        <a href="#피뢰시스템" onclick="trackClick(this)">피뢰시스템<span class="click-count">0</span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#조명설비" onclick="trackClick(this)">조명설비<span class="click-count">0</span></a>
+        <a href="#접지시스템" onclick="trackClick(this)">접지시스템<span class="click-count">0</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🔥 소방기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">필수</div>
+      <div class="index-links">
+        <a href="#스프링클러" onclick="trackClick(this)">스프링클러<span class="click-count">0</span></a>
+        <a href="#소화기구" onclick="trackClick(this)">소화기구<span class="click-count">0</span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#경보설비" onclick="trackClick(this)">경보설비<span class="click-count">0</span></a>
+        <a href="#방화구획" onclick="trackClick(this)">방화구획<span class="click-count">0</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">📊 정보관리기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">필수</div>
+      <div class="index-links">
+        <a href="#정보보안" onclick="trackClick(this)">정보보안<span class="click-count">0</span></a>
+        <a href="#네트워크계층" onclick="trackClick(this)">네트워크계층<span class="click-count">0</span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#SQL최적화" onclick="trackClick(this)">SQL최적화<span class="click-count">0</span></a>
+        <a href="#시스템아키텍처" onclick="trackClick(this)">시스템아키텍처<span class="click-count">0</span></a>
       </div>
     </div>
   </div>
 
   <script>
     function trackClick(el) {
-      const key = el.getAttribute("href");
+      const key = el.textContent.trim();
       let count = parseInt(localStorage.getItem(key) || "0");
       count++;
       localStorage.setItem(key, count);
 
-      // 색상 리셋
       el.classList.remove("click-1", "click-3", "click-5");
 
-      if (count >= 5) {
-        el.classList.add("click-5");
-      } else if (count >= 3) {
-        el.classList.add("click-3");
-      } else {
-        el.classList.add("click-1");
-      }
+      if (count >= 5) el.classList.add("click-5");
+      else if (count >= 3) el.classList.add("click-3");
+      else el.classList.add("click-1");
 
-      // 숫자 업데이트
       const countSpan = el.querySelector(".click-count");
       if (countSpan) countSpan.textContent = count;
     }
 
     window.onload = () => {
       document.querySelectorAll('.index-links a').forEach(el => {
-        const key = el.getAttribute("href");
+        const key = el.textContent.trim();
         const count = parseInt(localStorage.getItem(key) || "0");
 
-        if (count >= 5) {
-          el.classList.add("click-5");
-        } else if (count >= 3) {
-          el.classList.add("click-3");
-        } else if (count >= 1) {
-          el.classList.add("click-1");
-        }
+        if (count >= 5) el.classList.add("click-5");
+        else if (count >= 3) el.classList.add("click-3");
+        else if (count >= 1) el.classList.add("click-1");
 
         const countSpan = el.querySelector(".click-count");
         if (countSpan) countSpan.textContent = count;
       });
     };
   </script>
-
 </body>
 </html>
