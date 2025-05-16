@@ -38,14 +38,14 @@
     }
 
     .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 10px;
       margin-bottom: 20px;
     }
 
     .tabs button {
+      width: 100%;
       background: var(--accent-bg);
       border: none;
       color: var(--text-color);
@@ -53,6 +53,7 @@
       border-radius: 20px;
       cursor: pointer;
       font-weight: bold;
+      box-sizing: border-box;
     }
 
     .tabs button.active {
@@ -191,19 +192,7 @@
           2: ['도장공사', '콘크리트양생'],
           3: ['철근시공', '슬래브'],
           4: ['방수공법', '적산기법']
-        },
-        '131회': {
-          1: ['조적공사', '건축재료'],
-          2: ['파일기초', '흙막이'],
-          3: ['단열재', '시공계획'],
-          4: ['건축법규', '품질관리']
-        },
-        '132회': {
-          1: ['지반조사', '건설안전'],
-          2: ['건축시공기술', '양생방법'],
-          3: ['마감재', '설계도서'],
-          4: ['공정관리', '공사비산정']
-        }    
+        }
       }
     };
 
@@ -214,14 +203,11 @@
       const scrollY = window.scrollY;
       document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
-
       const observer = new MutationObserver(() => {
         window.scrollTo({ top: scrollY });
         observer.disconnect();
       });
-
       observer.observe(document.getElementById('content'), { childList: true, subtree: true });
-
       renderCategory(category);
     }
 
@@ -233,7 +219,6 @@
         container.innerHTML = '<p style="text-align:center">즐겨찾기한 키워드가 없습니다.</p>';
         return;
       }
-
       const card = document.createElement('div');
       card.className = 'index-card';
       card.innerHTML = `<div class="index-title">⭐ 즐겨찾기</div>`;
@@ -280,7 +265,7 @@
           list.dataset.session = i;
           if (i !== 1) list.style.display = 'none';
 
-          items[session][i].forEach(keyword => {
+          items[session][i]?.forEach(keyword => {
             const item = document.createElement('div');
             item.className = 'keyword';
             if (favorites[keyword]) item.classList.add('favorited');
@@ -290,7 +275,6 @@
 
           card.appendChild(list);
         }
-
         container.appendChild(card);
       }
     }
@@ -318,7 +302,6 @@
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
         renderSearchHistory();
       }
-
       document.querySelectorAll('.keyword').forEach(el => {
         const text = el.textContent.toLowerCase();
         el.style.display = text.includes(input) ? 'flex' : 'none';
@@ -336,4 +319,3 @@
     });
   </script>
 </body>
-</html>
