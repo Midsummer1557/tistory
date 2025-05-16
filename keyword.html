@@ -195,16 +195,28 @@
   <div id="content" class="index-container"></div>
 
   <script>
-    const data = {
-      시공: {
-        '130회': {
-          1: ['가설구조물', '기초공법'],
-          2: ['도장공사', '콘크리트양생'],
-          3: ['철근시공', '슬래브'],
-          4: ['방수공법', '적산기법']
-        }
-      }
-    };
+const data = {
+  시공: {
+    '130회': {
+      1: [
+        { text: '가설구조물', url: 'https://ko.wikipedia.org/wiki/가설구조물' },
+        { text: '기초공법', url: 'https://ko.wikipedia.org/wiki/기초공법' }
+      ],
+      2: [
+        { text: '도장공사', url: 'https://ko.wikipedia.org/wiki/도장공사' },
+        { text: '콘크리트양생', url: 'https://ko.wikipedia.org/wiki/콘크리트' }
+      ],
+      3: [
+        { text: '철근시공', url: 'https://ko.wikipedia.org/wiki/철근콘크리트' },
+        { text: '슬래브', url: 'https://ko.wikipedia.org/wiki/슬래브' }
+      ],
+      4: [
+        { text: '방수공법', url: 'https://ko.wikipedia.org/wiki/방수' },
+        { text: '적산기법', url: 'https://ko.wikipedia.org/wiki/적산' }
+      ]
+    }
+  }
+};
 
     const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
