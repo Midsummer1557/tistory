@@ -16,13 +16,13 @@
       margin-bottom: 50px;
     }
 
-.subtitle {
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-  margin: 0 auto 20px auto;
-  width: fit-content;
-}
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin: 0 auto 20px auto;
+      width: fit-content;
+    }
 
     .section-title {
       font-size: 24px;
@@ -62,7 +62,9 @@
     }
 
     .index-links a {
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       text-decoration: none;
       color: #333;
       padding: 3px 0;
@@ -73,10 +75,18 @@
       color: #0077cc;
     }
 
-    /* 색상 단계 */
-    .click-1 { color: #1565c0; } /* 파랑 */
-    .click-3 { color: #ff8f00; } /* 주황 */
-    .click-5 { color: #d32f2f; } /* 빨강 */
+    .click-1 { color: #1565c0; }
+    .click-3 { color: #ff8f00; }
+    .click-5 { color: #d32f2f; }
+
+    .click-count {
+      font-size: 12px;
+      background: #eee;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 10px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -84,98 +94,33 @@
   <h1>📚 기술사 기출 서브노트</h1>
   <div class="subtitle">제가 공부하려고 만든 서브노트입니다.</div>
 
-  <!-- 건축시공기술사 -->
+  <!-- 예시: 건축시공기술사 -->
   <div class="section-title">🏗️ 건축시공기술사</div>
   <div class="index-container">
     <div class="index-card">
       <div class="index-title">필수</div>
       <div class="index-links">
-        <a href="#가설구조물" onclick="trackClick(this)">업데이트 예정</a>
+        <a href="#가설구조물" onclick="trackClick(this)">가설구조물<span class="click-count">0</span></a>
+        <a href="#기초공법" onclick="trackClick(this)">기초공법<span class="click-count">0</span></a>
       </div>
     </div>
     <div class="index-card">
       <div class="index-title">추천</div>
       <div class="index-links">
-        <a href="#기초공법" onclick="trackClick(this)">업데이트 예정</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 건축기계설비기술사 -->
-  <div class="section-title">🛠️ 건축기계설비기술사</div>
-  <div class="index-container">
-    <div class="index-card">
-      <div class="index-title">필수</div>
-      <div class="index-links">
-        <a href="https://namu.wiki/w/%EA%B8%B0%EC%88%A0%EC%82%AC" onclick="trackClick(this)">기술사란?</a>
-      </div>
-    </div>
-    <div class="index-card">
-      <div class="index-title">추천</div>
-      <div class="index-links">
-        <a href="#배관시스템" onclick="trackClick(this)">업데이트 예정</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 건축전기설비기술사 -->
-  <div class="section-title">💡 건축전기설비기술사</div>
-  <div class="index-container">
-    <div class="index-card">
-      <div class="index-title">필수</div>
-      <div class="index-links">
-        <a href="#전기이론" onclick="trackClick(this)">업데이트 예정</a>
-      </div>
-    </div>
-    <div class="index-card">
-      <div class="index-title">추천</div>
-      <div class="index-links">
-        <a href="#접지" onclick="trackClick(this)">업데이트 예정</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 소방기술사 -->
-  <div class="section-title">🔥 소방기술사</div>
-  <div class="index-container">
-    <div class="index-card">
-      <div class="index-title">필수</div>
-      <div class="index-links">
-        <a href="#소화설비" onclick="trackClick(this)">업데이트 예정</a>
-      </div>
-    </div>
-    <div class="index-card">
-      <div class="index-title">추천</div>
-      <div class="index-links">
-        <a href="#경보시스템" onclick="trackClick(this)">업데이트 예정</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- 정보관리기술사 -->
-  <div class="section-title">📊 정보관리기술사</div>
-  <div class="index-container">
-    <div class="index-card">
-      <div class="index-title">필수</div>
-      <div class="index-links">
-        <a href="#보안정책" onclick="trackClick(this)">업데이트 예정</a>
-      </div>
-    </div>
-    <div class="index-card">
-      <div class="index-title">추천</div>
-      <div class="index-links">
-        <a href="#데이터베이스" onclick="trackClick(this)">업데이트 예정</a>
+        <a href="#도장공사" onclick="trackClick(this)">도장공사<span class="click-count">0</span></a>
+        <a href="#철근콘크리트" onclick="trackClick(this)">철근콘크리트<span class="click-count">0</span></a>
       </div>
     </div>
   </div>
 
   <script>
     function trackClick(el) {
-      const key = el.getAttribute("href"); // "#가설구조물" 같은 고유 식별자
+      const key = el.getAttribute("href");
       let count = parseInt(localStorage.getItem(key) || "0");
       count++;
       localStorage.setItem(key, count);
 
+      // 색상 리셋
       el.classList.remove("click-1", "click-3", "click-5");
 
       if (count >= 5) {
@@ -185,12 +130,15 @@
       } else {
         el.classList.add("click-1");
       }
+
+      // 숫자 업데이트
+      const countSpan = el.querySelector(".click-count");
+      if (countSpan) countSpan.textContent = count;
     }
 
-    // 페이지 로드 시 기존 클릭 이력 반영
     window.onload = () => {
       document.querySelectorAll('.index-links a').forEach(el => {
-        const key = el.getAttribute("href"); // "#가설구조물" 같은 고유 식별자
+        const key = el.getAttribute("href");
         const count = parseInt(localStorage.getItem(key) || "0");
 
         if (count >= 5) {
@@ -200,6 +148,9 @@
         } else if (count >= 1) {
           el.classList.add("click-1");
         }
+
+        const countSpan = el.querySelector(".click-count");
+        if (countSpan) countSpan.textContent = count;
       });
     };
   </script>
