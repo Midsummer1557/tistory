@@ -41,8 +41,15 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       font-size: 32px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 30px;
     }
 
     .tabs, .session-tabs {
@@ -62,6 +69,15 @@
       cursor: pointer;
       font-weight: 500;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      flex: 1 1 45%;
+      max-width: 45%;
+    }
+
+    @media (max-width: 600px) {
+      .tabs button, .session-tabs button {
+        flex: 1 1 80%;
+        max-width: 80%;
+      }
     }
 
     .tabs button.active, .session-tabs button.active {
@@ -98,6 +114,13 @@
       cursor: pointer;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    .accordion-desc {
+      font-size: 14px;
+      margin: 5px 0 15px 0;
+      color: #888;
+      text-align: center;
     }
 
     .index-container {
@@ -142,6 +165,10 @@
       padding: 5px 0;
     }
 
+    .index-links a:hover span:first-child {
+      text-decoration: underline;
+    }
+
     .index-links a.highlight {
       font-weight: bold;
       color: var(--highlight);
@@ -157,6 +184,32 @@
       color: gold;
     }
 
+    .index-links a span:first-child {
+      position: relative;
+    }
+
+    .index-links a span:first-child::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 120%;
+      left: 0;
+      background-color: #333;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(5px);
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .index-links a span:first-child:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .dark-toggle {
       display: block;
       width: fit-content;
@@ -170,10 +223,16 @@
       font-size: 16px;
       font-weight: 500;
     }
+
+    .favorite-tab {
+      text-align: center;
+      margin: 40px 0;
+    }
   </style>
 </head>
 <body>
   <h1>📚 기술사 키워드 인덱스</h1>
+  <div class="subtitle">기술사 시험에 자주 출제되는 키워드를 회차 및 교시별로 정리했습니다.</div>
 
   <div class="tabs">
     <button class="active" onclick="showTab('시공')">🏗️ 건축시공</button>
@@ -181,10 +240,11 @@
     <button onclick="showTab('전기')">💡 전기설비</button>
     <button onclick="showTab('소방')">🔥 소방기술</button>
     <button onclick="showTab('정보')">📊 정보관리</button>
+    <button onclick="showFavorites()">⭐ 즐겨찾기</button>
   </div>
 
   <div class="search-container">
-    <input type="text" id="searchInput" onkeyup="filterKeywords()" placeholder="키워드 검색...">
+    <input type="text" id="searchInput" onkeyup="filterKeywords()" placeholder="키워드 또는 회차 검색...">
   </div>
 
   <div id="content"></div>
@@ -192,32 +252,23 @@
   <button class="dark-toggle" onclick="toggleTheme()">🌙 다크모드</button>
 
   <script>
-    const data = {
-      시공: {
-        "130회": {
-          1: ["가설구조물", "기초공법"],
-          2: ["도장공사", "콘크리트양생"],
-          3: ["철근시공", "슬래브"],
-          4: ["방수공법", "적산기법"]
-        }
-      },
-      기계: {
-        "128회": {
-          1: ["기계환기", "에너지절감"],
-          2: ["열교환기", "냉방부하계산"],
-          3: ["펌프종류", "배관시스템"],
-          4: ["덕트설계", "흡음설비"]
-        }
-      }
-      // 나머지 기술사도 동일한 구조로 추가 가능
-    };
-
+    let data = {};
     const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
+
+    function loadData() {
+      fetch('data.json')
+        .then(res => res.json())
+        .then(json => {
+          data = json;
+          renderContent('시공');
+        });
+    }
 
     function renderContent(category) {
       const container = document.getElementById("content");
       container.innerHTML = "";
       const sets = data[category];
+      if (!sets) return;
       for (const session in sets) {
         const accordion = document.createElement("div");
         accordion.className = "accordion";
@@ -225,6 +276,7 @@
 
         accordion.innerHTML = `
           <div class="accordion-title" onclick="toggleAccordion(this)">${session} ${category} 기술사</div>
+          <div class="accordion-desc">${category} ${session} 출제 경향 분석 요약 문장.</div>
           <div class="index-container">
             <div class="session-tabs">
               <button onclick="showSession(this, 1)">1교시</button>
@@ -232,14 +284,15 @@
               <button onclick="showSession(this, 3)">3교시</button>
               <button onclick="showSession(this, 4)">4교시</button>
             </div>
+            <div class="accordion-desc">각 교시별 핵심 이슈와 기술 트렌드를 분석해 보세요.</div>
             <div class="index-grid">
               ${Object.entries(sets[session]).map(([s, keywords]) => `
                 <div class="index-card session-${s}" data-session="${s}" style="display:${s == 1 ? 'block' : 'none'}">
                   <div class="index-title">${s}교시</div>
                   <div class="index-links">
-                    ${keywords.map(k => `
+                    ${keywords.map(([k, d]) => `
                       <a href="#" class="${favorites[k] ? 'favorited' : ''}" onclick="toggleFavorite(event, '${k}')">
-                        <span>${k}</span>
+                        <span title="${d}">${k}</span>
                         <span class="star">★</span>
                       </a>`).join('')}
                   </div>
@@ -249,6 +302,29 @@
         `;
         container.appendChild(accordion);
       }
+    }
+
+    function showFavorites() {
+      const container = document.getElementById("content");
+      container.innerHTML = '<div class="favorite-tab"><h2>⭐ 즐겨찾기 키워드</h2></div>';
+      const keywords = Object.keys(favorites).filter(k => favorites[k]);
+      if (keywords.length === 0) {
+        container.innerHTML += '<p style="text-align:center">즐겨찾기한 키워드가 없습니다.</p>';
+        return;
+      }
+      const grid = document.createElement("div");
+      grid.className = "index-grid";
+      keywords.forEach(k => {
+        const card = document.createElement("div");
+        card.className = "index-card session-1";
+        card.innerHTML = `<div class="index-links">
+          <a href="#" class="favorited" onclick="toggleFavorite(event, '${k}')">
+            <span title="즐겨찾기된 키워드">${k}</span><span class="star">★</span>
+          </a>
+        </div>`;
+        grid.appendChild(card);
+      });
+      container.appendChild(grid);
     }
 
     function toggleAccordion(el) {
@@ -292,13 +368,12 @@
       e.preventDefault();
       favorites[keyword] = !favorites[keyword];
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      renderContent(document.querySelector('.tabs button.active').textContent.replace(/[^가-힣]/g, ''));
+      const current = document.querySelector('.tabs button.active')?.textContent?.replace(/[^가-힣]/g, '') || '';
+      if (current) renderContent(current);
+      else showFavorites();
     }
 
-    // 초기 렌더링
-    document.addEventListener('DOMContentLoaded', () => {
-      renderContent('시공');
-    });
+    document.addEventListener('DOMContentLoaded', loadData);
   </script>
 </body>
 </html>
