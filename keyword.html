@@ -173,6 +173,27 @@
     .keyword.favorited .star {
       color: gold;
     }
+
+
+/* 교시 버튼 공통 hover 효과 */
+.session-tabs button:hover {
+  filter: brightness(95%);
+  border: 2px solid #bbb;
+}
+
+/* 활성화된 버튼 강조 */
+.session-tabs button.active {
+  background-color: var(--highlight) !important;
+  color: white;
+  transform: scale(1.05);
+  border: 2px solid #1d5ecf;
+  box-shadow: 0 2px 6px rgba(47, 128, 237, 0.4);
+}
+
+
+
+
+    
   </style>
 </head>
 <body>
