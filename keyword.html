@@ -60,36 +60,6 @@
       color: white;
     }
 
-    .search-container {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .search-container input {
-      width: 90%;
-      max-width: 400px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .search-history {
-      text-align: center;
-      font-size: 14px;
-      color: #888;
-      margin-top: 10px;
-    }
-
-    .search-history span {
-      display: inline-block;
-      background: #eee;
-      color: #333;
-      padding: 4px 10px;
-      border-radius: 20px;
-      margin: 4px;
-      font-size: 13px;
-    }
-
     .index-container {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
@@ -132,27 +102,20 @@
       cursor: pointer;
       transition: 0.3s;
     }
-
-    .session-tabs button.session-1 {
-      background-color: var(--session-1);
-    }
-
-    .session-tabs button.session-2 {
-      background-color: var(--session-2);
-    }
-
-    .session-tabs button.session-3 {
-      background-color: var(--session-3);
-    }
-
-    .session-tabs button.session-4 {
-      background-color: var(--session-4);
-    }
-
+    .session-tabs button.session-1 { background-color: var(--session-1);}
+    .session-tabs button.session-2 { background-color: var(--session-2);}
+    .session-tabs button.session-3 { background-color: var(--session-3);}
+    .session-tabs button.session-4 { background-color: var(--session-4);}
     .session-tabs button.active {
       background-color: var(--highlight) !important;
       color: white;
       transform: scale(1.05);
+      border: 2px solid #1d5ecf;
+      box-shadow: 0 2px 6px rgba(47, 128, 237, 0.4);
+    }
+    .session-tabs button:hover {
+      filter: brightness(95%);
+      border: 2px solid #bbb;
     }
 
     .keyword-list {
@@ -160,18 +123,19 @@
     }
 
     .keyword {
-      display: flex;
-      justify-content: space-between;
       margin: 5px 0;
+      font-size: 16px;
     }
 
-    .keyword .star {
-      cursor: pointer;
-      color: #ccc;
+    .keyword a {
+      color: var(--highlight);
+      text-decoration: underline;
+      font-weight: bold;
+      transition: color 0.2s;
     }
-
-    .keyword.favorited .star {
-      color: gold;
+    .keyword a:hover {
+      color: #144b9c;
+      text-decoration: underline wavy;
     }
   </style>
 </head>
@@ -181,75 +145,34 @@
 
   <div class="tabs">
     <button class="active" onclick="showTab('시공')">건축시공</button>
-    <button onclick="showTab('전기')">전기설비</button>
-    <button onclick="showTab('소방')">소방기술</button>
-    <button onclick="showTab('정보')">정보관리</button>
-    <button onclick="showFavorites()">⭐ 즐겨찾기</button>
+    <!-- 예시로 시공만 구현, 다른 탭은 원하면 추가 -->
   </div>
-
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="키워드 검색..." onkeyup="filterKeywords()" />
-  </div>
-  <div id="searchHistory" class="search-history"></div>
 
   <div id="content" class="index-container"></div>
 
   <script>
-const data = {
-  시공: {
-    '130회': {
-      1: [
-        { text: '가설구조물', url: 'https://ko.wikipedia.org/wiki/가설구조물' },
-        { text: '기초공법', url: 'https://ko.wikipedia.org/wiki/기초공법' }
-      ],
-      2: [
-        { text: '도장공사', url: 'https://ko.wikipedia.org/wiki/도장공사' },
-        { text: '콘크리트양생', url: 'https://ko.wikipedia.org/wiki/콘크리트' }
-      ],
-      3: [
-        { text: '철근시공', url: 'https://ko.wikipedia.org/wiki/철근콘크리트' },
-        { text: '슬래브', url: 'https://ko.wikipedia.org/wiki/슬래브' }
-      ],
-      4: [
-        { text: '방수공법', url: 'https://ko.wikipedia.org/wiki/방수' },
-        { text: '적산기법', url: 'https://ko.wikipedia.org/wiki/적산' }
-      ]
-    }
-  }
-};
-
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
-    let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
-
-    function showTab(category) {
-      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      renderCategory(category);
-    }
-
-    function showFavorites() {
-      const container = document.getElementById('content');
-      container.innerHTML = '';
-      const keywords = Object.keys(favorites).filter(k => favorites[k]);
-      if (keywords.length === 0) {
-        container.innerHTML = '<p style="text-align:center">즐겨찾기한 키워드가 없습니다.</p>';
-        return;
+    const data = {
+      시공: {
+        '130회': {
+          1: [
+            { text: '가설구조물', url: 'https://ko.wikipedia.org/wiki/가설구조물' },
+            { text: '기초공법', url: 'https://ko.wikipedia.org/wiki/기초공법' }
+          ],
+          2: [
+            { text: '도장공사', url: 'https://ko.wikipedia.org/wiki/도장공사' },
+            { text: '콘크리트양생', url: 'https://ko.wikipedia.org/wiki/콘크리트' }
+          ],
+          3: [
+            { text: '철근시공', url: 'https://ko.wikipedia.org/wiki/철근콘크리트' },
+            { text: '슬래브', url: 'https://ko.wikipedia.org/wiki/슬래브' }
+          ],
+          4: [
+            { text: '방수공법', url: 'https://ko.wikipedia.org/wiki/방수' },
+            { text: '적산기법', url: 'https://ko.wikipedia.org/wiki/적산' }
+          ]
+        }
       }
-
-      const card = document.createElement('div');
-      card.className = 'index-card';
-      card.innerHTML = `<div class="index-title">⭐ 즐겨찾기</div>`;
-      const list = document.createElement('div');
-      list.className = 'keyword-list';
-      keywords.forEach(k => {
-        const item = document.createElement('div');
-        item.className = 'keyword favorited';
-        item.innerHTML = `<span>${k}</span><span class="star" onclick="toggleFavorite(event, '${k}')">★</span>`;
-        list.appendChild(item);
-      });
-      card.appendChild(list);
-      container.appendChild(card);
-    }
+    };
 
     function renderCategory(category) {
       const container = document.getElementById('content');
@@ -269,7 +192,7 @@ const data = {
         for (let i = 1; i <= 4; i++) {
           const btn = document.createElement('button');
           btn.textContent = `${i}교시`;
-          btn.classList.add(`session-${i}`); // 교시별 색상 적용
+          btn.classList.add(`session-${i}`);
           btn.onclick = () => showSession(card, i);
           if (i === 1) btn.classList.add('active');
           tab.appendChild(btn);
@@ -282,11 +205,10 @@ const data = {
           list.dataset.session = i;
           if (i !== 1) list.style.display = 'none';
 
-          items[session][i]?.forEach(keyword => {
+          items[session][i]?.forEach(keywordObj => {
             const item = document.createElement('div');
             item.className = 'keyword';
-            if (favorites[keyword]) itehttp://m.classList.add('favorited');
-            item.innerHTML = `<span>${keyword}</span><span class="star" onclick="toggleFavorite(event, '${keyword}')">★</span>`;
+            item.innerHTML = `<a href="${keywordObj.url}" target="_blank">${keywordObj.text}</a>`;
             list.appendChild(item);
           });
 
@@ -305,36 +227,14 @@ const data = {
       });
     }
 
-    function toggleFavorite(e, keyword) {
-      e.preventDefault();
-      favorites[keyword] = !favorites[keyword];
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      renderCategory(document.querySelector('.tabs button.active').textContent.trim());
-    }
-
-    function filterKeywords() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      if (input.length > 1 && !searchHistory.includes(input)) {
-        searchHistory.unshift(input);
-        if (searchHistory.length > 10) searchHistory.pop();
-        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-        renderSearchHistory();
-      }
-
-      document.querySelectorAll('.keyword').forEach(el => {
-        const text = el.textContent.toLowerCase();
-        el.style.display = text.includes(input) ? 'flex' : 'none';
-      });
-    }
-
-    function renderSearchHistory() {
-      const container = document.getElementById('searchHistory');
-      container.innerHTML = searchHistory.map(q => `<span>${q}</span>`).join('');
+    function showTab(category) {
+      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderCategory(category);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       renderCategory('시공');
-      renderSearchHistory();
     });
   </script>
 </body>
