@@ -10,51 +10,41 @@
       background-color: #f4f4f4;
       padding: 30px;
       margin: 0;
-      font-size: 16px; /* 추가 */
-    }
+      font-size: 16px; /* 추가 */}
     h1 {
       text-align: center;
-      margin-bottom: 50px;
-    }
+      margin-bottom: 50px;}
     .subtitle {
       text-align: center;
       font-size: 14px;
       color: #666;
       margin: 0 auto 20px auto;
-      width: fit-content;
-    }
+      width: fit-content;}
     .section-title {
       font-size: 24px;
       font-weight: bold;
       color: #222;
       margin-top: 60px;
       margin-bottom: 20px;
-      border-left: 6px solid #007acc;
-      padding-left: 12px;
-    }
+      padding-left: 18px;}
     .index-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
       max-width: 1200px;
-      margin: 0 auto 60px auto;
-    }
+      margin: 0 auto 60px auto;}
     .index-card {
       background-color: white;
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      transition: transform 0.2s;
-    }
-    .index-card:hover {
-      transform: translateY(-4px);
-    }
+      transition: transform 0.2s;}
+    .index-card:hover {transform: translateY(-4px);}
     .index-title {
       font-weight: bold;
       font-size: 18px;
       margin-bottom: 10px;
-      color: #211f1f;
-    }
+      color: #211f1f;}
     .index-links a {
       display: flex;
       justify-content: space-between;
@@ -62,11 +52,9 @@
       text-decoration: none;
       color: #333;
       padding: 3px 0;
-      transition: color 0.3s;
-    }
+      transition: color 0.3s;}
     .index-links a:hover {
-      color: #0077cc;
-    }
+      color: #0077cc;}
 
     /* 클릭 횟수별 색상 */
     .click-1 { color: #c2372b !important; }
@@ -79,24 +67,41 @@
       padding: 2px 8px;
       border-radius: 12px;
       margin-left: 10px;
-      color: #666;
-    }
+      color: #666;}
+
+    
+    /* 프로그레스바 스타일 */
+    .progress-wrapper {
+      margin: 20px 0 60px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;}
+    .progress-label {
+      font-size: 14px;
+      margin-bottom: 5px;}
+    .progress-bar {
+      background-color: #ddd;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;}
+    .progress-fill {
+      height: 100%;
+      background-color: #007acc;
+      width: 0%;
+      transition: width 0.5s;}
+    .progress-percent {
+      font-size: 13px;
+      text-align: right;
+      margin-top: 5px;}
 
 
+
+/* 모바일 반응 */
 @media (max-width: 768px) {
-  body {
-    font-size: 15px;
-  }
-  .index-title {
-    font-size: 16px;
-  }
-  .section-title {
-    font-size: 20px;
-  }
-  .click-count {
-    font-size: 11px;
-  }
-}
+  body {font-size: 15px;}
+  .index-title {font-size: 16px;}
+  .section-title {font-size: 20px;}
+  .click-count {font-size: 11px;}}
 
 
 
@@ -148,8 +153,21 @@
   </div>
 
 
-  <!-- 💡 건축전기설비기술사 -->
+  <!-- 💡 건축전기설비기술사 제목 -->
   <div class="section-title">💡 건축전기설비기술사</div>
+
+
+  <!-- 💡 건축전기설비기술사 프로그레스 바 -->
+<div class="progress-wrapper" id="progress-⚙️ 건축기계설비기술사">
+  <div class="progress-label">목표 클릭수 1000회</div>
+  <div class="progress-bar">
+    <div class="progress-fill"></div>
+  </div>
+  <div class="progress-percent">0%</div>
+</div>
+
+
+  <!-- 💡 건축전기설비기술사 내용 -->
   <div class="index-container">
     <div class="index-card">
       <div class="index-title">필수</div>
@@ -205,14 +223,17 @@
 
   
 <script>
+  /* 클릭 수 체크*/
   function trackClick(el) {
     const key = el.dataset.key;
     let count = parseInt(localStorage.getItem(key) || "0");
     count++;
     localStorage.setItem(key, count);
     updateVisual(el, count);
+    updateAllProgressBars();
   }
-
+  
+  /* 클릭 수 시각화 기준*/
   function updateVisual(el, count) {
     el.classList.remove("click-1", "click-3", "click-5");
 
@@ -228,19 +249,50 @@
       emoji = '🔥';
     }
 
+    /* 클릭 수 시각화*/
     const span = el.querySelector('.click-count');
     if (span) {
       span.textContent = `${count} ${emoji}`;
     }
   }
 
+
+
+
+  /* 프로그레스바*/
+  function updateAllProgressBars() {
+    document.querySelectorAll('.section-title').forEach(titleEl => {
+      const field = titleEl.textContent.trim();
+      const container = titleEl.nextElementSibling;
+      const progressWrapper = document.getElementById('progress-' + field);
+      if (!progressWrapper || !container) return;
+
+      let totalClicks = 0;
+      container.querySelectorAll('a[data-key]').forEach(a => {
+        const key = a.dataset.key;
+        totalClicks += parseInt(localStorage.getItem(key) || "0");
+      });
+
+      const percent = Math.min(100, Math.round(totalClicks / 10));
+      const fill = progressWrapper.querySelector('.progress-fill');
+      const label = progressWrapper.querySelector('.progress-percent');
+      if (fill) fill.style.width = `${percent}%`;
+      if (label) label.textContent = `${percent}% (${totalClicks}회 클릭)`;
+    });
+  }
+
+
+
+
+  
   window.onload = () => {
-    document.querySelectorAll('.index-links a').forEach(el => {
+    document.querySelectorAll('a[data-key]').forEach(el => {
       const key = el.dataset.key;
       el.setAttribute('target', '_blank');
       const count = parseInt(localStorage.getItem(key) || "0");
       if (count > 0) updateVisual(el, count);
     });
+    updateAllProgressBars();
   };
 </script>
 
