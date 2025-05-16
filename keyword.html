@@ -116,6 +116,39 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     }
 
+    .session-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .session-tabs button {
+      background-color: var(--accent-bg);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-color);
+      transition: background-color 0.3s ease;
+      flex: 1 1 20%;
+      max-width: 200px;
+    }
+
+    .session-tabs button.active {
+      background-color: var(--highlight);
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      .session-tabs button {
+        flex: 1 1 80%;
+        max-width: 80%;
+      }
+    }
+
     .index-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -208,38 +241,6 @@
           2: ["도장공사", "콘크리트양생"],
           3: ["철근시공", "슬래브"],
           4: ["방수공법", "적산기법"]
-        }
-      },
-      기계: {
-        "128회": {
-          1: ["기계환기", "에너지절감"],
-          2: ["열교환기", "냉방부하계산"],
-          3: ["펌프종류", "배관시스템"],
-          4: ["덕트설계", "흡음설비"]
-        }
-      },
-      전기: {
-        "127회": {
-          1: ["피뢰시스템", "절연협조"],
-          2: ["조명설계", "고조파 대책"],
-          3: ["전압강하", "수배전반"],
-          4: ["케이블 포설", "접지시스템"]
-        }
-      },
-      소방: {
-        "126회": {
-          1: ["화재하중", "스프링클러"],
-          2: ["감지기 종류", "소화기 종류"],
-          3: ["배연설비", "피난계획"],
-          4: ["방화구획", "자동화재탐지"]
-        }
-      },
-      정보: {
-        "125회": {
-          1: ["정보보안 개념", "클라우드 아키텍처"],
-          2: ["DB 정규화", "빅데이터 처리"],
-          3: ["SW 개발 프로세스", "애자일 방법론"],
-          4: ["IoT 구조", "API 설계"]
         }
       }
     };
