@@ -12,32 +12,14 @@
     }
     h1 {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 50px;
     }
     .subtitle {
       text-align: center;
       font-size: 14px;
       color: #666;
-      margin-bottom: 20px;
-    }
-    .button-group {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .button-group button {
-      margin: 0 6px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .reset-button {
-      background-color: #e53935;
-      color: white;
-    }
-    .favorite-toggle {
-      background-color: #ffd600;
+      margin: 0 auto 20px auto;
+      width: fit-content;
     }
     .section-title {
       font-size: 24px;
@@ -69,7 +51,7 @@
       font-weight: bold;
       font-size: 18px;
       margin-bottom: 10px;
-      color: #004c8c;
+      color: #211f1f;
     }
     .index-links a {
       display: flex;
@@ -84,9 +66,10 @@
       color: #0077cc;
     }
 
-    .click-1 { color: #d6471c !important; }
-    .click-3 { color: #e8e51e !important; }
-    .click-5 { color: #faf602 !important; }
+    /* 클릭 횟수별 색상 */
+    .click-1 { color: #c2372b !important; }
+    .click-3 { color: #d92d1e !important; }
+    .click-5 { color: #ed1e0c !important; }
 
     .click-count {
       font-size: 12px;
@@ -96,20 +79,6 @@
       margin-left: 10px;
       color: #666;
     }
-
-    .star {
-      cursor: pointer;
-      margin-left: 8px;
-      font-size: 14px;
-    }
-
-    .favorited .star {
-      color: gold;
-    }
-
-    .hidden {
-      display: none !important;
-    }
   </style>
 </head>
 <body>
@@ -117,116 +86,147 @@
   <h1>📚 기술사 기출 서브노트</h1>
   <div class="subtitle">제가 공부하려고 만든 서브노트입니다.</div>
 
-  <div class="button-group">
-    <button onclick="resetAllCounts()" class="reset-button">🔄 클릭 수 초기화</button>
-    <button onclick="toggleFavoriteView()" class="favorite-toggle" id="favoriteBtn">⭐ 즐겨찾기만 보기</button>
-  </div>
-
   <!-- 🏗️ 건축시공기술사 -->
   <div class="section-title">🏗️ 건축시공기술사</div>
   <div class="index-container">
     <div class="index-card">
       <div class="index-title">필수</div>
       <div class="index-links">
-        <a href="#가설구조물" data-key="가설구조물" onclick="trackClick(this)">
-          가설구조물<span class="click-count"></span><span class="star" onclick="toggleFavorite(event, this)">☆</span>
-        </a>
-        <a href="#기초공법" data-key="기초공법" onclick="trackClick(this)">
-          기초공법<span class="click-count"></span><span class="star" onclick="toggleFavorite(event, this)">☆</span>
-        </a>
+        <a href="#가설구조물" data-key="가설구조물" onclick="trackClick(this)">가설구조물<span class="click-count"></span></a>
+        <a href="#기초공법" data-key="기초공법" onclick="trackClick(this)">기초공법<span class="click-count"></span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#도장공사" data-key="도장공사" onclick="trackClick(this)">도장공사<span class="click-count"></span></a>
+        <a href="#슬래브시공" data-key="슬래브시공" onclick="trackClick(this)">슬래브시공<span class="click-count"></span></a>
       </div>
     </div>
   </div>
 
-  <script>
-    const favoriteKey = 'favorites';
-    let showFavoritesOnly = false;
+  <!-- ⚙️ 건축기계설비기술사 -->
+  <div class="section-title">⚙️ 건축기계설비기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">필수</div>
+      <div class="index-links">
+        <a href="#펌프종류" data-key="펌프종류" onclick="trackClick(this)">펌프종류<span class="click-count"></span></a>
+        <a href="#냉난방시스템" data-key="냉난방시스템" onclick="trackClick(this)">냉난방시스템<span class="click-count"></span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#배관설계" data-key="배관설계" onclick="trackClick(this)">배관설계<span class="click-count"></span></a>
+        <a href="#에너지절약기법" data-key="에너지절약기법" onclick="trackClick(this)">에너지절약기법<span class="click-count"></span></a>
+      </div>
+    </div>
+  </div>
 
-    function trackClick(el) {
+  <!-- 💡 건축전기설비기술사 -->
+  <div class="section-title">💡 건축전기설비기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">필수</div>
+      <div class="index-links">
+        <a href="#배선설계" data-key="배선설계" onclick="trackClick(this)">배선설계<span class="click-count"></span></a>
+        <a href="#피뢰시스템" data-key="피뢰시스템" onclick="trackClick(this)">피뢰시스템<span class="click-count"></span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#조명설비" data-key="조명설비" onclick="trackClick(this)">조명설비<span class="click-count"></span></a>
+        <a href="#접지시스템" data-key="접지시스템" onclick="trackClick(this)">접지시스템<span class="click-count"></span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔥 소방기술사 -->
+  <div class="section-title">🔥 소방기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">필수</div>
+      <div class="index-links">
+        <a href="#스프링클러" data-key="스프링클러" onclick="trackClick(this)">스프링클러<span class="click-count"></span></a>
+        <a href="#소화기구" data-key="소화기구" onclick="trackClick(this)">소화기구<span class="click-count"></span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#경보설비" data-key="경보설비" onclick="trackClick(this)">경보설비<span class="click-count"></span></a>
+        <a href="#방화구획" data-key="방화구획" onclick="trackClick(this)">방화구획<span class="click-count"></span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📊 정보관리기술사 -->
+  <div class="section-title">📊 정보관리기술사</div>
+  <div class="index-container">
+    <div class="index-card">
+      <div class="index-title">필수</div>
+      <div class="index-links">
+        <a href="#정보보안" data-key="정보보안" onclick="trackClick(this)">정보보안<span class="click-count"></span></a>
+        <a href="#네트워크계층" data-key="네트워크계층" onclick="trackClick(this)">네트워크계층<span class="click-count"></span></a>
+      </div>
+    </div>
+    <div class="index-card">
+      <div class="index-title">추천</div>
+      <div class="index-links">
+        <a href="#SQL최적화" data-key="SQL최적화" onclick="trackClick(this)">SQL최적화<span class="click-count"></span></a>
+        <a href="#시스템아키텍처" data-key="시스템아키텍처" onclick="trackClick(this)">시스템아키텍처<span class="click-count"></span></a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  
+<script>
+  function trackClick(el) {
+    const key = el.dataset.key;
+    let count = parseInt(localStorage.getItem(key) || "0");
+    count++;
+    localStorage.setItem(key, count);
+    updateVisual(el, count);
+  }
+
+  function updateVisual(el, count) {
+    el.classList.remove("click-1", "click-3", "click-5");
+
+    let emoji = '';
+    if (count >= 5) {
+      el.classList.add("click-5");
+      emoji = '🎓';
+    } else if (count >= 3) {
+      el.classList.add("click-3");
+      emoji = '⭐';
+    } else if (count >= 1) {
+      el.classList.add("click-1");
+      emoji = '🔥';
+    }
+
+    const span = el.querySelector('.click-count');
+    if (span) {
+      span.textContent = `${count} ${emoji}`;
+    }
+  }
+
+  window.onload = () => {
+    document.querySelectorAll('.index-links a').forEach(el => {
       const key = el.dataset.key;
-      let count = parseInt(localStorage.getItem(key) || "0");
-      count++;
-      localStorage.setItem(key, count);
-      updateVisual(el, count);
-    }
+      const count = parseInt(localStorage.getItem(key) || "0");
+      if (count > 0) updateVisual(el, count);
+    });
+  };
+</script>
 
-    function updateVisual(el, count) {
-      el.classList.remove("click-1", "click-3", "click-5");
-      let emoji = '';
-      if (count >= 5) {
-        el.classList.add("click-5");
-        emoji = '🎓';
-      } else if (count >= 3) {
-        el.classList.add("click-3");
-        emoji = '⭐';
-      } else if (count >= 1) {
-        el.classList.add("click-1");
-        emoji = '🔥';
-      }
 
-      const span = el.querySelector('.click-count');
-      if (span) span.textContent = `${count} ${emoji}`;
-    }
 
-    function resetAllCounts() {
-      if (!confirm('모든 클릭 수를 초기화하시겠습니까?')) return;
-      document.querySelectorAll('.index-links a').forEach(el => {
-        const key = el.dataset.key;
-        localStorage.removeItem(key);
-        el.classList.remove("click-1", "click-3", "click-5");
-        const span = el.querySelector('.click-count');
-        if (span) span.textContent = '';
-      });
-      alert('✅ 클릭 수가 초기화되었습니다.');
-    }
-
-    function toggleFavorite(e, starEl) {
-      e.stopPropagation(); // 링크 클릭 방지
-      const aTag = starEl.closest('a');
-      const key = aTag.dataset.key;
-      let favorites = JSON.parse(localStorage.getItem(favoriteKey) || '{}');
-      if (favorites[key]) {
-        delete favorites[key];
-        aTag.classList.remove('favorited');
-        starEl.textContent = '☆';
-      } else {
-        favorites[key] = true;
-        aTag.classList.add('favorited');
-        starEl.textContent = '★';
-      }
-      localStorage.setItem(favoriteKey, JSON.stringify(favorites));
-    }
-
-    function toggleFavoriteView() {
-      showFavoritesOnly = !showFavoritesOnly;
-      const btn = document.getElementById('favoriteBtn');
-      btn.textContent = showFavoritesOnly ? '📋 전체 보기' : '⭐ 즐겨찾기만 보기';
-
-      const favorites = JSON.parse(localStorage.getItem(favoriteKey) || '{}');
-      document.querySelectorAll('.index-links a').forEach(el => {
-        const key = el.dataset.key;
-        if (showFavoritesOnly && !favorites[key]) {
-          el.classList.add('hidden');
-        } else {
-          el.classList.remove('hidden');
-        }
-      });
-    }
-
-    window.onload = () => {
-      const favorites = JSON.parse(localStorage.getItem(favoriteKey) || '{}');
-
-      document.querySelectorAll('.index-links a').forEach(el => {
-        const key = el.dataset.key;
-        const count = parseInt(localStorage.getItem(key) || "0");
-        if (count > 0) updateVisual(el, count);
-        if (favorites[key]) {
-          el.classList.add('favorited');
-          const starEl = el.querySelector('.star');
-          if (starEl) starEl.textContent = '★';
-        }
-      });
-    };
-  </script>
+  
 </body>
 </html>
