@@ -73,8 +73,8 @@
     }
 
     .tabs button.active, .session-tabs button.active {
-      background-color: var(--highlight);
-      color: white;
+      background-color: var(--highlight) !important;
+      color: white !important;
       transform: scale(1.05);
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
@@ -146,8 +146,14 @@
 
     .index-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(1, 1fr); /* mobile */
       gap: 20px;
+    }
+
+    @media (min-width: 1024px) {
+      .index-grid {
+        grid-template-columns: repeat(3, 1fr); /* desktop */
+      }
     }
 
     .index-card {
@@ -334,7 +340,9 @@
       e.preventDefault();
       favorites[keyword] = !favorites[keyword];
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      renderContent(document.querySelector('.tabs button.active').textContent.replace(/[^가-힣]/g, ''));
+      const currentCategory = document.querySelector('.tabs button.active')?.textContent?.replace(/[^가-힣]/g, '') || '';
+      if (currentCategory) renderContent(currentCategory);
+      else showFavorites();
     }
 
     function showFavorites() {
