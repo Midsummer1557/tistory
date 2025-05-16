@@ -12,6 +12,10 @@
       --highlight: #2f80ed;
       --accent-bg: #ecf3ff;
       --hover-bg: #dbeaff;
+      --session-1: #e6f0ff;
+      --session-2: #e8f5e9;
+      --session-3: #fff8e1;
+      --session-4: #fce4ec;
     }
 
     [data-theme="dark"] {
@@ -21,6 +25,10 @@
       --highlight: #4dabf7;
       --accent-bg: #1a2b3c;
       --hover-bg: #2a3b4c;
+      --session-1: #1e2f40;
+      --session-2: #1f3f30;
+      --session-3: #3e3a1f;
+      --session-4: #3d2a35;
     }
 
     body {
@@ -37,14 +45,14 @@
       font-size: 32px;
     }
 
-    .tabs {
+    .tabs, .session-tabs {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin-bottom: 20px;
     }
 
-    .tabs button {
+    .tabs button, .session-tabs button {
       background: var(--accent-bg);
       border: none;
       color: var(--text-color);
@@ -56,7 +64,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    .tabs button.active {
+    .tabs button.active, .session-tabs button.active {
       background-color: var(--highlight);
       color: white;
     }
@@ -101,15 +109,6 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     }
 
-    .session-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: var(--highlight);
-      margin: 20px 0 10px;
-      border-left: 5px solid var(--highlight);
-      padding-left: 10px;
-    }
-
     .index-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -117,15 +116,15 @@
     }
 
     .index-card {
-      background-color: var(--accent-bg);
       border-radius: 12px;
       padding: 15px;
       transition: all 0.3s;
     }
 
-    .index-card:hover {
-      background-color: var(--hover-bg);
-    }
+    .session-1 { background-color: var(--session-1); }
+    .session-2 { background-color: var(--session-2); }
+    .session-3 { background-color: var(--session-3); }
+    .session-4 { background-color: var(--session-4); }
 
     .index-title {
       font-weight: bold;
@@ -144,7 +143,6 @@
     }
 
     .index-links a.highlight {
-      background-color: transparent;
       font-weight: bold;
       color: var(--highlight);
     }
@@ -178,107 +176,81 @@
   <h1>📚 기술사 키워드 인덱스</h1>
 
   <div class="tabs">
-    <button class="active" onclick="showTab('시공')">🏗️ 건축시공기술사</button>
-    <button onclick="showTab('기계')">⚙️ 기계설비기술사/button>
-    <button onclick="showTab('전기')">💡 전기설비기술사</button>
-    <button onclick="showTab('소방')">🔥 소방기술사</button>
-    <button onclick="showTab('정보')">📊 정보관리기술사</button>
+    <button class="active" onclick="showTab('시공')">🏗️ 건축시공</button>
+    <button onclick="showTab('기계')">⚙️ 기계설비</button>
+    <button onclick="showTab('전기')">💡 전기설비</button>
+    <button onclick="showTab('소방')">🔥 소방기술</button>
+    <button onclick="showTab('정보')">📊 정보관리</button>
   </div>
 
   <div class="search-container">
     <input type="text" id="searchInput" onkeyup="filterKeywords()" placeholder="키워드 검색...">
   </div>
 
-  <div id="content">
-    <!-- 시공 기술사 -->
-    <div class="accordion" data-category="시공">
-      <div class="accordion-title" onclick="toggleAccordion(this)">🏗️ 건축시공기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-title">130회</div>
-        <div class="session-title">1교시</div>
-        <div class="index-grid">
-          <div class="index-card">
-            <div class="index-links">
-              <a href="#"><span>가설구조물</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-              <a href="#"><span>기초공법</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 기계설비 기술사 -->
-    <div class="accordion" data-category="기계">
-      <div class="accordion-title" onclick="toggleAccordion(this)">⚙️ 건축기계설비기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-title">128회</div>
-        <div class="session-title">2교시</div>
-        <div class="index-grid">
-          <div class="index-card">
-            <div class="index-links">
-              <a href="#"><span>냉난방 부하계산</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-              <a href="#"><span>공기조화 방식</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 전기설비 기술사 -->
-    <div class="accordion" data-category="전기">
-      <div class="accordion-title" onclick="toggleAccordion(this)">💡 건축전기설비기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-title">127회</div>
-        <div class="session-title">3교시</div>
-        <div class="index-grid">
-          <div class="index-card">
-            <div class="index-links">
-              <a href="#"><span>피뢰시스템</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-              <a href="#"><span>배선설계 기준</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 소방 기술사 -->
-    <div class="accordion" data-category="소방">
-      <div class="accordion-title" onclick="toggleAccordion(this)">🔥 소방기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-title">126회</div>
-        <div class="session-title">4교시</div>
-        <div class="index-grid">
-          <div class="index-card">
-            <div class="index-links">
-              <a href="#"><span>스프링클러 헤드 설계</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-              <a href="#"><span>화재 하중</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 정보관리 기술사 -->
-    <div class="accordion" data-category="정보">
-      <div class="accordion-title" onclick="toggleAccordion(this)">📊 정보관리기술사 키워드</div>
-      <div class="index-container">
-        <div class="index-title">125회</div>
-        <div class="session-title">1교시</div>
-        <div class="index-grid">
-          <div class="index-card">
-            <div class="index-links">
-              <a href="#"><span>시스템 개발 생명주기</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-              <a href="#"><span>정보보안 프레임워크</span><span class="star" onclick="toggleFavorite(event, this)">★</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="content"></div>
 
   <button class="dark-toggle" onclick="toggleTheme()">🌙 다크모드</button>
 
   <script>
+    const data = {
+      시공: {
+        "130회": {
+          1: ["가설구조물", "기초공법"],
+          2: ["도장공사", "콘크리트양생"],
+          3: ["철근시공", "슬래브"],
+          4: ["방수공법", "적산기법"]
+        }
+      },
+      기계: {
+        "128회": {
+          1: ["기계환기", "에너지절감"],
+          2: ["열교환기", "냉방부하계산"],
+          3: ["펌프종류", "배관시스템"],
+          4: ["덕트설계", "흡음설비"]
+        }
+      }
+      // 나머지 기술사도 동일한 구조로 추가 가능
+    };
+
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
+
+    function renderContent(category) {
+      const container = document.getElementById("content");
+      container.innerHTML = "";
+      const sets = data[category];
+      for (const session in sets) {
+        const accordion = document.createElement("div");
+        accordion.className = "accordion";
+        accordion.setAttribute("data-category", category);
+
+        accordion.innerHTML = `
+          <div class="accordion-title" onclick="toggleAccordion(this)">${session} ${category} 기술사</div>
+          <div class="index-container">
+            <div class="session-tabs">
+              <button onclick="showSession(this, 1)">1교시</button>
+              <button onclick="showSession(this, 2)">2교시</button>
+              <button onclick="showSession(this, 3)">3교시</button>
+              <button onclick="showSession(this, 4)">4교시</button>
+            </div>
+            <div class="index-grid">
+              ${Object.entries(sets[session]).map(([s, keywords]) => `
+                <div class="index-card session-${s}" data-session="${s}" style="display:${s == 1 ? 'block' : 'none'}">
+                  <div class="index-title">${s}교시</div>
+                  <div class="index-links">
+                    ${keywords.map(k => `
+                      <a href="#" class="${favorites[k] ? 'favorited' : ''}" onclick="toggleFavorite(event, '${k}')">
+                        <span>${k}</span>
+                        <span class="star">★</span>
+                      </a>`).join('')}
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>
+        `;
+        container.appendChild(accordion);
+      }
+    }
+
     function toggleAccordion(el) {
       const content = el.nextElementSibling;
       content.style.display = (content.style.display === 'block') ? 'none' : 'block';
@@ -287,8 +259,15 @@
     function showTab(category) {
       document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
-      document.querySelectorAll('.accordion').forEach(acc => {
-        acc.style.display = (acc.getAttribute('data-category') === category) ? 'block' : 'none';
+      renderContent(category);
+    }
+
+    function showSession(el, num) {
+      const parent = el.closest('.index-container');
+      parent.querySelectorAll('.session-tabs button').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      parent.querySelectorAll('.index-card').forEach(card => {
+        card.style.display = card.getAttribute('data-session') == num ? 'block' : 'none';
       });
     }
 
@@ -309,11 +288,17 @@
       document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
     }
 
-    function toggleFavorite(e, el) {
+    function toggleFavorite(e, keyword) {
       e.preventDefault();
-      const link = el.parentElement;
-      link.classList.toggle('favorited');
+      favorites[keyword] = !favorites[keyword];
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      renderContent(document.querySelector('.tabs button.active').textContent.replace(/[^가-힣]/g, ''));
     }
+
+    // 초기 렌더링
+    document.addEventListener('DOMContentLoaded', () => {
+      renderContent('시공');
+    });
   </script>
 </body>
 </html>
