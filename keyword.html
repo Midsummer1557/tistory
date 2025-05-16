@@ -171,7 +171,7 @@
 
   <script>
     function trackClick(el) {
-      const key = el.textContent.trim();
+      const key = el.getAttribute("href"); // "#가설구조물" 같은 고유 식별자
       let count = parseInt(localStorage.getItem(key) || "0");
       count++;
       localStorage.setItem(key, count);
@@ -190,7 +190,7 @@
     // 페이지 로드 시 기존 클릭 이력 반영
     window.onload = () => {
       document.querySelectorAll('.index-links a').forEach(el => {
-        const key = el.textContent.trim();
+        const key = el.getAttribute("href"); // "#가설구조물" 같은 고유 식별자
         const count = parseInt(localStorage.getItem(key) || "0");
 
         if (count >= 5) {
