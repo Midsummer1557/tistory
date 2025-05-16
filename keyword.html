@@ -173,27 +173,6 @@
     .keyword.favorited .star {
       color: gold;
     }
-
-
-/* 교시 버튼 공통 hover 효과 */
-.session-tabs button:hover {
-  filter: brightness(95%);
-  border: 2px solid #bbb;
-}
-
-/* 활성화된 버튼 강조 */
-.session-tabs button.active {
-  background-color: var(--highlight) !important;
-  color: white;
-  transform: scale(1.05);
-  border: 2px solid #1d5ecf;
-  box-shadow: 0 2px 6px rgba(47, 128, 237, 0.4);
-}
-
-
-
-
-    
   </style>
 </head>
 <body>
@@ -216,25 +195,16 @@
   <div id="content" class="index-container"></div>
 
   <script>
-let data = {};
-
-function showTab(category) {
-  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-
-  // 외부 JSON 파일에서 데이터 fetch
-  fetch(`data/시공.json`)
-    .then(res => res.json())
-    .then(json => {
-      data[category] = json;
-      renderCategory(category);
-    })
-    .catch(err => {
-      console.error(`시공 데이터를 불러오는 데 실패했습니다.`, err);
-      document.getElementById('content').innerHTML = `<p style="text-align:center">❌ 시공 데이터를 불러올 수 없습니다.</p>`;
-    });
-}
-
+    const data = {
+      시공: {
+        '130회': {
+          1: ['가설구조물', '기초공법'],
+          2: ['도장공사', '콘크리트양생'],
+          3: ['철근시공', '슬래브'],
+          4: ['방수공법', '적산기법']
+        }
+      }
+    };
 
     const favorites = JSON.parse(localStorage.getItem('favorites') || '{}');
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
@@ -303,7 +273,7 @@ function showTab(category) {
           items[session][i]?.forEach(keyword => {
             const item = document.createElement('div');
             item.className = 'keyword';
-            if (favorites[keyword]) item.classList.add('favorited');
+            if (favorites[keyword]) itehttp://m.classList.add('favorited');
             item.innerHTML = `<span>${keyword}</span><span class="star" onclick="toggleFavorite(event, '${keyword}')">★</span>`;
             list.appendChild(item);
           });
@@ -350,10 +320,10 @@ function showTab(category) {
       container.innerHTML = searchHistory.map(q => `<span>${q}</span>`).join('');
     }
 
-document.addEventListener('DOMContentLoaded', () => {
-  showTab('시공');
-  renderSearchHistory();
-});
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCategory('시공');
+      renderSearchHistory();
+    });
   </script>
 </body>
 </html>
